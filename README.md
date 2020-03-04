@@ -1,2 +1,7 @@
 # Financial_Engineering
-姓名：李承恩 學號：R08323023 系級：台大經研所碩一
+This is the repo for NTU course, Financial Engineering
+## Author 
+* Name: **Lowson Li**
+* Student ID: R08323023
+* Department: Economics, first year of postgraduate
+
