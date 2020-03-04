@@ -1,0 +1,189 @@
+---
+title: "In class practice"
+author: "Lowson Li"
+output:
+  html_notebook:
+    code_folding: show
+    highlight: tango
+    number_sections: yes
+    theme: simplex
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    toc: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+# Future value 
+Formula
+$$
+FV = P(1+\frac{r}{m})^{nm}
+$$
+
+Example
+A company should pay $20 million after 4 years. It can invest money at annual rate of 7% semiannually. How much shoud the company invest today?
+$$
+20,000,000 = P(1+\frac{7\%}{2})^{2\cdot4}
+$$
+Answer 
+```{r}
+20000000/((1+(0.07/2))^(1/8))
+```
+
+# Continuous compounding
+Since $$\lim_{x\rightarrow \infty } (1+\frac{a}{n})^n = e^a$$
+we have $$\lim_{x\rightarrow \infty } (1+\frac{r}{m})^n = e^r$$
+Thus in continuous compounding, the future value should be 
+$$ FV = Pe^{rn}$$
+# Conversion between compunding method 
+$r_1$: Annual rate with continuous compunding method
+$r_2$: Equivelant rate compounded $m$ times per annum
+Since 
+$$
+FV = P(1+\frac{r_2}{m})^{mn}=Pe^{r_1 \cdot n}
+$$
+We have 
+$$
+\begin{equation}
+\begin{aligned}
+r_1 &=m\ln(1+\frac{r_2}{m}) \\
+r_2 &= m(e^{\frac{r_1}{m}}-1)
+\end{aligned}
+\end{equation}
+$$
+Example 
+Consider interest rate of 10% with quarterly compounding. What's the equivelent rate with continunous rate?
+```{r}
+4*log(1+(0.1/4))
+```
+# Annuity 
+* Ordinary annuity: **pays out** the same amount of money at the **end of month**.
+* Annuity due: **receives** the same amount of money at the **begining of the month**.
+
+## Ordinary annuity 
+$$
+\begin{equation}
+\begin{aligned}
+FV &= C +C(1+r)+...+C(1+r)^{n-1} \\
+&= \sum_{i=0}^{n-1}C(1+r)^{i} \\
+&= C \frac{(1+r)^n-1}{r}
+\end{aligned}
+\end{equation}
+$$
+
+
+Allowing compounded $m$ times:
+
+$$
+FV =C \frac{(1+\frac{r}{m})^{nm}-1}{\frac{r}{m}}
+$$
+
+
+## Annuity due 
+$$
+\begin{equation}
+\begin{aligned}
+FV &= C(1+r)+...+C(1+r)^n \\
+&= \sum_{i=1}^{n}C(1+r)^{i} \\
+&=C(1+r)\frac{(1+r)^n-1}{r}
+\end{aligned}
+\end{equation}
+$$
+
+Allowing compounded $m$ times:
+
+$$
+FV =C (1+\frac{r}{m})\frac{(1+\frac{r}{m})^{nm}-1}{\frac{r}{m}}
+$$
+## Present value of the general annuity
+$$
+P=\sum_{i=1}^{mn}C(1+r)^{-i}  = C \frac{1-(1+\frac{r}{m}^{-nm})}{\frac{r}{m}}
+$$
+Example
+The $P$ of an annuity of $100 per annum for 5 yeats at annual rate of 6.25% is 
+
+```{r}
+# define annuity function
+cal_annuity <- function(c, r, p) {
+  a <- 0
+  for (i in 1:p) {
+    temp <- (1 + r)^(-i)
+    a <- a + temp
+  }
+  return(c * a)
+}
+```
+```{r}
+# calculate annuity
+cal_annuity(100,0.0625,5)
+```
+# Mortgage
+Example 
+Consider a 15-year, $250,000 loan at 8% interest rate, what's the monthly payment?
+(Hint: use general annuity formula)
+```{r}
+250000/((1-((1+(0.08/12))^(-12*15)))/(0.08/12))
+```
+
+# Yields
+The return of the investment.
+* Bond Equivalent Yield, BEY
+* Mortgage Equivalent Yield, MEY
+
+# Zero-Coupon Bonds 
+The $price$ of a zero coupon bonds that pays $F$ dollars in $n$ periods follows:
+$$
+Price = \frac{F}{(1+r)^n}
+$$
+Example: 
+The interest rate is compounded semiannually. A zero coupon bond that pays the par value 20 years from now will be priced at how much of its par value?
+$r=8\%,m=2,n=20$ 
+$$
+\frac{Price}{F} = \frac{1}{(1+\frac{r}{m})^{nm}}= \frac{1}{(1+\frac{8\%}{2})^{20\cdot2}}
+$$
+```{r}
+1/((1+(0.08/2))^(20*2))
+```
+If the bond matures in 10 years instead of 20 years, the price will be 
+```{r}
+1/((1+(0.08/2))^(10*2))
+```
+# Level coupon bond
+$$
+\begin{equation}
+\begin{aligned}
+FV &=\frac{C}{(1+r)}+...+\frac{C+F}{(1+r)^n} \\
+&= \frac{F}{(1+r)^n}+\sum_{i=1}^{n}C(1+r)^{-i} \\
+&= \frac{F}{(1+r)^n} +C\frac{1-(1+r)^n}{r}
+\end{aligned}
+\end{equation}
+$$
+General case with $m$ coupon per annum. 
+$$
+\begin{equation}
+\begin{aligned}
+FV &= \frac{F}{(1+\frac{r}{m})^{nm}} +C\frac{1-(1+\frac{r}{m})^{nm}}{\frac{r}{m}} 
+\end{aligned}
+\end{equation}
+$$
+Define coupon $C$  is given by the par value $F$, the coupon rate $c$ and the compounding frequency $m$, such that 
+$$
+C=\frac{Fc}{m}
+$$
+
+Example 
+15% BEY, 10 years bond with compound rate of 10% paid semiannually should sell for 
+(Hint: assume the par value is 100)
+```{r}
+(100*0.1/2)*((1-(1+(0.15/2))^(-10*2))/(0.15/2))+(100/(1+(0.15/2))^(10*2))
+```
+

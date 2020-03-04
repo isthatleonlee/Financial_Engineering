@@ -365,26 +365,35 @@ div.tocify {
 <!-- rnb-text-begin -->
 <div id="future-value" class="section level1">
 <h1><span class="header-section-number">1</span> Future value</h1>
+<p>Formula <span class="math display">\[
+FV = P(1+\frac{r}{m})^{nm}
+\]</span></p>
+<p>Example A company should pay $20 million after 4 years. It can invest money at annual rate of 7% semiannually. How much shoud the company invest today? <span class="math display">\[
+20,000,000 = P(1+\frac{7\%}{2})^{2\cdot4}
+\]</span> Answer</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjAwMDAwMDAvKCgxKygwLjA3LzIpKV4oMS84KSlcblxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">20000000</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.07</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">8</span>))</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE5OTE0MTgxXG4ifQ== -->
+<pre><code>[1] 19914181</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="cash-flow" class="section level1">
-<h1><span class="header-section-number">2</span> Cash flow</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="conversion-between-compouding-methods" class="section level1">
-<h1><span class="header-section-number">3</span> Conversion between compouding methods</h1>
-<div id="insert-formula" class="section level2">
-<h2><span class="header-section-number">3.1</span> (insert formula)</h2>
-</div>
-<div id="example" class="section level2">
-<h2><span class="header-section-number">3.2</span> Example</h2>
-<p>Consider interest rate of 10% with quarterly compounding. What’s the equivelent rate with continunous rate?</p>
+<div id="continuous-compounding" class="section level1">
+<h1><span class="header-section-number">2</span> Continuous compounding</h1>
+<p>Since <span class="math display">\[\lim_{x\rightarrow \infty } (1+\frac{a}{n})^n = e^a\]</span> we have <span class="math display">\[\lim_{x\rightarrow \infty } (1+\frac{r}{m})^n = e^r\]</span> Thus in continuous compounding, the future value should be <span class="math display">\[ FV = Pe^{rn}\]</span> # Conversion between compunding method <span class="math inline">\(r_1\)</span>: Annual rate with continuous compunding method <span class="math inline">\(r_2\)</span>: Equivelant rate compounded <span class="math inline">\(m\)</span> times per annum Since <span class="math display">\[
+FV = P(1+\frac{r_2}{m})^{mn}=Pe^{r_1 \cdot n}
+\]</span> We have <span class="math display">\[
+\begin{equation}
+\begin{aligned}
+r_1 &amp;=m\ln(1+\frac{r_2}{m}) \\
+r_2 &amp;= m(e^{\frac{r_1}{m}}-1)
+\end{aligned}
+\end{equation}
+\]</span> Example Consider interest rate of 10% with quarterly compounding. What’s the equivelent rate with continunous rate?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuNCpsb2coMSsoMC4xLzQpKVxuXG5gYGAifQ== -->
@@ -396,29 +405,152 @@ div.tocify {
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-</div>
 <div id="annuity" class="section level1">
-<h1><span class="header-section-number">4</span> Annuity</h1>
-<div id="insert-formula-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> (insert formula)</h2>
+<h1><span class="header-section-number">3</span> Annuity</h1>
+<ul>
+<li>Ordinary annuity: <strong>pays out</strong> the same amount of money at the <strong>end of month</strong>.</li>
+<li>Annuity due: <strong>receives</strong> the same amount of money at the <strong>begining of the month</strong>.</li>
+</ul>
+<div id="ordinary-annuity" class="section level2">
+<h2><span class="header-section-number">3.1</span> Ordinary annuity</h2>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+FV &amp;= C +C(1+r)+...+C(1+r)^{n-1} \\
+&amp;= \sum_{i=0}^{n-1}C(1+r)^{i} \\
+&amp;= C \frac{(1+r)^n-1}{r}
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Allowing compounded <span class="math inline">\(m\)</span> times:</p>
+<p><span class="math display">\[
+FV =C \frac{(1+\frac{r}{m})^{nm}-1}{\frac{r}{m}}
+\]</span></p>
 </div>
-<div id="example-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> Example</h2>
+<div id="annuity-due" class="section level2">
+<h2><span class="header-section-number">3.2</span> Annuity due</h2>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+FV &amp;= C(1+r)+...+C(1+r)^n \\
+&amp;= \sum_{i=1}^{n}C(1+r)^{i} \\
+&amp;=C(1+r)\frac{(1+r)^n-1}{r}
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Allowing compounded <span class="math inline">\(m\)</span> times:</p>
+<p><span class="math display">\[
+FV =C (1+\frac{r}{m})\frac{(1+\frac{r}{m})^{nm}-1}{\frac{r}{m}}
+\]</span> ## Present value of the general annuity <span class="math display">\[
+P=\sum_{i=1}^{mn}C(1+r)^{-i}  = C \frac{1-(1+\frac{r}{m}^{-nm})}{\frac{r}{m}}
+\]</span> Example The <span class="math inline">\(P\)</span> of an annuity of $100 per annum for 5 yeats at annual rate of 6.25% is</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMTAwKigoMS0oMS4wNjI1KV4oLTUpLzAuMDYyNSkpXG5cbmBgYCJ9 -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">100</span><span class="op">*</span>((<span class="dv">1</span><span class="op">-</span>(<span class="fl">1.0625</span>)<span class="op">^</span>(<span class="op">-</span><span class="dv">5</span>)<span class="op">/</span><span class="fl">0.0625</span>))</code></pre></div>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZWZpbmUgYW5udWl0eSBmdW5jdGlvblxuY2FsX2FubnVpdHkgPC0gZnVuY3Rpb24oYywgciwgcCkge1xuICBhIDwtIDBcbiAgZm9yIChpIGluIDE6cCkge1xuICAgIHRlbXAgPC0gKDEgKyByKV4oLWkpXG4gICAgYSA8LSBhICsgdGVtcFxuICB9XG4gIHJldHVybihjICogYSlcbn1cbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define annuity function</span>
+cal_annuity &lt;-<span class="st"> </span><span class="cf">function</span>(c, r, p) {
+  a &lt;-<span class="st"> </span><span class="dv">0</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>p) {
+    temp &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>r)<span class="op">^</span>(<span class="op">-</span>i)
+    a &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>temp
+  }
+  <span class="kw">return</span>(c <span class="op">*</span><span class="st"> </span>a)
+}</code></pre></div>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIC0xMDgxLjYxM1xuIn0= -->
-<pre><code>[1] -1081.613</code></pre>
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjYWxjdWxhdGUgYW5udWl0eVxuY2FsX2FubnVpdHkoMTAwLDAuMDYyNSw1KVxuXG5gYGAifQ== -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate annuity</span>
+<span class="kw">cal_annuity</span>(<span class="dv">100</span>,<span class="fl">0.0625</span>,<span class="dv">5</span>)</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQxOC4zODY5XG4ifQ== -->
+<pre><code>[1] 418.3869</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="mortgage" class="section level1">
+<h1><span class="header-section-number">4</span> Mortgage</h1>
+<p>Example Consider a 15-year, $250,000 loan at 8% interest rate, what’s the monthly payment? (Hint: use general annuity formula)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSlcblxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">250000</span><span class="op">/</span>((<span class="dv">1</span><span class="op">-</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">12</span>))<span class="op">^</span>(<span class="op">-</span><span class="dv">12</span><span class="op">*</span><span class="dv">15</span>)))<span class="op">/</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">12</span>))</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzODkuMTNcbiJ9 -->
+<pre><code>[1] 2389.13</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="yields" class="section level1">
+<h1><span class="header-section-number">5</span> Yields</h1>
+<p>The return of the investment. * Bond Equivalent Yield, BEY * Mortgage Equivalent Yield, MEY</p>
+</div>
+<div id="zero-coupon-bonds" class="section level1">
+<h1><span class="header-section-number">6</span> Zero-Coupon Bonds</h1>
+<p>The <span class="math inline">\(price\)</span> of a zero coupon bonds that pays <span class="math inline">\(F\)</span> dollars in <span class="math inline">\(n\)</span> periods follows: <span class="math display">\[
+Price = \frac{F}{(1+r)^n}
+\]</span> Example: The interest rate is compounded semiannually. A zero coupon bond that pays the par value 20 years from now will be priced at how much of its par value? <span class="math inline">\(r=8\%,m=2,n=20\)</span> <span class="math display">\[
+\frac{Price}{F} = \frac{1}{(1+\frac{r}{m})^{nm}}= \frac{1}{(1+\frac{8\%}{2})^{20\cdot2}}
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS8oKDErKDAuMDgvMikpXigyMCoyKSlcblxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">20</span><span class="op">*</span><span class="dv">2</span>))</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMjA4Mjg5XG4ifQ== -->
+<pre><code>[1] 0.208289</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>If the bond matures in 10 years instead of 20 years, the price will be</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS8oKDErKDAuMDgvMikpXigxMCoyKSlcblxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">10</span><span class="op">*</span><span class="dv">2</span>))</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNDU2Mzg2OVxuIn0= -->
+<pre><code>[1] 0.4563869</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="level-coupon-bond" class="section level1">
+<h1><span class="header-section-number">7</span> Level coupon bond</h1>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+FV &amp;=\frac{C}{(1+r)}+...+\frac{C+F}{(1+r)^n} \\
+&amp;= \frac{F}{(1+r)^n}+\sum_{i=1}^{n}C(1+r)^{-i} \\
+&amp;= \frac{F}{(1+r)^n} +C\frac{1-(1+r)^n}{r}
+\end{aligned}
+\end{equation}
+\]</span> General case with <span class="math inline">\(m\)</span> coupon per annum. <span class="math display">\[
+\begin{equation}
+\begin{aligned}
+FV &amp;= \frac{F}{(1+\frac{r}{m})^{nm}} +C\frac{1-(1+\frac{r}{m})^{nm}}{\frac{r}{m}} 
+\end{aligned}
+\end{equation}
+\]</span> Define coupon <span class="math inline">\(C\)</span> is given by the par value <span class="math inline">\(F\)</span>, the coupon rate <span class="math inline">\(c\)</span> and the compounding frequency <span class="math inline">\(m\)</span>, such that <span class="math display">\[
+C=\frac{Fc}{m}
+\]</span></p>
+<p>Example 15% BEY, 10 years bond with compound rate of 10% paid semiannually should sell for (Hint: assume the par value is 100)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKDEwMCowLjEvMikqKCgxLSgxKygwLjE1LzIpKV4oLTEwKjIpKS8oMC4xNS8yKSkrKDEwMC8oMSsoMC4xNS8yKSleKDEwKjIpKVxuXG5gYGAifQ== -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">100</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="dv">2</span>)<span class="op">*</span>((<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.15</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="op">-</span><span class="dv">10</span><span class="op">*</span><span class="dv">2</span>))<span class="op">/</span>(<span class="fl">0.15</span><span class="op">/</span><span class="dv">2</span>))<span class="op">+</span>(<span class="dv">100</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.15</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">10</span><span class="op">*</span><span class="dv">2</span>))</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDc0LjUxMzc3XG4ifQ== -->
+<pre><code>[1] 74.51377</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW4gY2xhc3MgcHJhY3RpY2UgIgphdXRob3I6ICJMb3dzb24gTGkiCm91dHB1dDoKICBodG1sX25vdGVib29rOgogICAgY29kZV9mb2xkaW5nOiBzaG93CiAgICBoaWdobGlnaHQ6IHRhbmdvCiAgICBudW1iZXJfc2VjdGlvbnM6IHllcwogICAgdGhlbWU6IHNpbXBsZXgKICAgIHRvYzogeWVzCiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogeWVzCiAgICAgIHNtb290aF9zY3JvbGw6IHllcwogIGh0bWxfZG9jdW1lbnQ6CiAgICBkZl9wcmludDogcGFnZWQKICAgIHRvYzogeWVzCiAgcGRmX2RvY3VtZW50OgogICAgdG9jOiB5ZXMKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGlubGluZQotLS0KCmBgYHtyIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0UsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFKQpgYGAKIyBGdXR1cmUgdmFsdWUgCmBgYHtyfQoKYGBgCiMgQ2FzaCBmbG93IApgYGB7cn0KCmBgYAojIENvbnZlcnNpb24gYmV0d2VlbiBjb21wb3VkaW5nIG1ldGhvZHMgCiMjIChpbnNlcnQgZm9ybXVsYSkKIyMgRXhhbXBsZSAKQ29uc2lkZXIgaW50ZXJlc3QgcmF0ZSBvZiAxMCUgd2l0aCBxdWFydGVybHkgY29tcG91bmRpbmcuIFdoYXQncyB0aGUgZXF1aXZlbGVudCByYXRlIHdpdGggY29udGludW5vdXMgcmF0ZT8KYGBge3J9CjQqbG9nKDErKDAuMS80KSkKYGBgCgojIEFubnVpdHkgCiMjIChpbnNlcnQgZm9ybXVsYSkKIyMgRXhhbXBsZSAKCmBgYHtyfQoxMDAqKCgxLSgxLjA2MjUpXigtNSkvMC4wNjI1KSkKYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW4gY2xhc3MgcHJhY3RpY2UiCmF1dGhvcjogIkxvd3NvbiBMaSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0aGVtZTogc2ltcGxleAogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogeWVzCiAgaHRtbF9kb2N1bWVudDoKICAgIGRmX3ByaW50OiBwYWdlZAogICAgdG9jOiB5ZXMKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogaW5saW5lCi0tLQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRSwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAojIEZ1dHVyZSB2YWx1ZSAKRm9ybXVsYQokJApGViA9IFAoMStcZnJhY3tyfXttfSlee25tfQokJAoKRXhhbXBsZQpBIGNvbXBhbnkgc2hvdWxkIHBheSAkMjAgbWlsbGlvbiBhZnRlciA0IHllYXJzLiBJdCBjYW4gaW52ZXN0IG1vbmV5IGF0IGFubnVhbCByYXRlIG9mIDclIHNlbWlhbm51YWxseS4gSG93IG11Y2ggc2hvdWQgdGhlIGNvbXBhbnkgaW52ZXN0IHRvZGF5PwokJAoyMCwwMDAsMDAwID0gUCgxK1xmcmFjezdcJX17Mn0pXnsyXGNkb3Q0fQokJApBbnN3ZXIgCmBgYHtyfQoyMDAwMDAwMC8oKDErKDAuMDcvMikpXigxLzgpKQpgYGAKCiMgQ29udGludW91cyBjb21wb3VuZGluZwpTaW5jZSAkJFxsaW1fe3hccmlnaHRhcnJvdyBcaW5mdHkgfSAoMStcZnJhY3thfXtufSlebiA9IGVeYSQkCndlIGhhdmUgJCRcbGltX3t4XHJpZ2h0YXJyb3cgXGluZnR5IH0gKDErXGZyYWN7cn17bX0pXm4gPSBlXnIkJApUaHVzIGluIGNvbnRpbnVvdXMgY29tcG91bmRpbmcsIHRoZSBmdXR1cmUgdmFsdWUgc2hvdWxkIGJlIAokJCBGViA9IFBlXntybn0kJAojIENvbnZlcnNpb24gYmV0d2VlbiBjb21wdW5kaW5nIG1ldGhvZCAKJHJfMSQ6IEFubnVhbCByYXRlIHdpdGggY29udGludW91cyBjb21wdW5kaW5nIG1ldGhvZAokcl8yJDogRXF1aXZlbGFudCByYXRlIGNvbXBvdW5kZWQgJG0kIHRpbWVzIHBlciBhbm51bQpTaW5jZSAKJCQKRlYgPSBQKDErXGZyYWN7cl8yfXttfSlee21ufT1QZV57cl8xIFxjZG90IG59CiQkCldlIGhhdmUgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CnJfMSAmPW1cbG4oMStcZnJhY3tyXzJ9e219KSBcXApyXzIgJj0gbShlXntcZnJhY3tyXzF9e219fS0xKQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCkV4YW1wbGUgCkNvbnNpZGVyIGludGVyZXN0IHJhdGUgb2YgMTAlIHdpdGggcXVhcnRlcmx5IGNvbXBvdW5kaW5nLiBXaGF0J3MgdGhlIGVxdWl2ZWxlbnQgcmF0ZSB3aXRoIGNvbnRpbnVub3VzIHJhdGU/CmBgYHtyfQo0KmxvZygxKygwLjEvNCkpCmBgYAojIEFubnVpdHkgCiogT3JkaW5hcnkgYW5udWl0eTogKipwYXlzIG91dCoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKiplbmQgb2YgbW9udGgqKi4KKiBBbm51aXR5IGR1ZTogKipyZWNlaXZlcyoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKipiZWdpbmluZyBvZiB0aGUgbW9udGgqKi4KCiMjIE9yZGluYXJ5IGFubnVpdHkgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CkZWICY9IEMgK0MoMStyKSsuLi4rQygxK3IpXntuLTF9IFxcCiY9IFxzdW1fe2k9MH1ee24tMX1DKDErcilee2l9IFxcCiY9IEMgXGZyYWN7KDErcilebi0xfXtyfQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCgoKQWxsb3dpbmcgY29tcG91bmRlZCAkbSQgdGltZXM6CgokJApGViA9QyBcZnJhY3soMStcZnJhY3tyfXttfSlee25tfS0xfXtcZnJhY3tyfXttfX0KJCQKCgojIyBBbm51aXR5IGR1ZSAKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KRlYgJj0gQygxK3IpKy4uLitDKDErcilebiBcXAomPSBcc3VtX3tpPTF9XntufUMoMStyKV57aX0gXFwKJj1DKDErcilcZnJhY3soMStyKV5uLTF9e3J9ClxlbmR7YWxpZ25lZH0KXGVuZHtlcXVhdGlvbn0KJCQKCkFsbG93aW5nIGNvbXBvdW5kZWQgJG0kIHRpbWVzOgoKJCQKRlYgPUMgKDErXGZyYWN7cn17bX0pXGZyYWN7KDErXGZyYWN7cn17bX0pXntubX0tMX17XGZyYWN7cn17bX19CiQkCiMjIFByZXNlbnQgdmFsdWUgb2YgdGhlIGdlbmVyYWwgYW5udWl0eQokJApQPVxzdW1fe2k9MX1ee21ufUMoMStyKV57LWl9ICA9IEMgXGZyYWN7MS0oMStcZnJhY3tyfXttfV57LW5tfSl9e1xmcmFje3J9e219fQokJApFeGFtcGxlClRoZSAkUCQgb2YgYW4gYW5udWl0eSBvZiAkMTAwIHBlciBhbm51bSBmb3IgNSB5ZWF0cyBhdCBhbm51YWwgcmF0ZSBvZiA2LjI1JSBpcyAKCmBgYHtyfQojIGRlZmluZSBhbm51aXR5IGZ1bmN0aW9uCmNhbF9hbm51aXR5IDwtIGZ1bmN0aW9uKGMsIHIsIHApIHsKICBhIDwtIDAKICBmb3IgKGkgaW4gMTpwKSB7CiAgICB0ZW1wIDwtICgxICsgcileKC1pKQogICAgYSA8LSBhICsgdGVtcAogIH0KICByZXR1cm4oYyAqIGEpCn0KYGBgCmBgYHtyfQojIGNhbGN1bGF0ZSBhbm51aXR5CmNhbF9hbm51aXR5KDEwMCwwLjA2MjUsNSkKYGBgCiMgTW9ydGdhZ2UKRXhhbXBsZSAKQ29uc2lkZXIgYSAxNS15ZWFyLCAkMjUwLDAwMCBsb2FuIGF0IDglIGludGVyZXN0IHJhdGUsIHdoYXQncyB0aGUgbW9udGhseSBwYXltZW50PwooSGludDogdXNlIGdlbmVyYWwgYW5udWl0eSBmb3JtdWxhKQpgYGB7cn0KMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSkKYGBgCgojIFlpZWxkcwpUaGUgcmV0dXJuIG9mIHRoZSBpbnZlc3RtZW50LgoqIEJvbmQgRXF1aXZhbGVudCBZaWVsZCwgQkVZCiogTW9ydGdhZ2UgRXF1aXZhbGVudCBZaWVsZCwgTUVZCgojIFplcm8tQ291cG9uIEJvbmRzIApUaGUgJHByaWNlJCBvZiBhIHplcm8gY291cG9uIGJvbmRzIHRoYXQgcGF5cyAkRiQgZG9sbGFycyBpbiAkbiQgcGVyaW9kcyBmb2xsb3dzOgokJApQcmljZSA9IFxmcmFje0Z9eygxK3IpXm59CiQkCkV4YW1wbGU6IApUaGUgaW50ZXJlc3QgcmF0ZSBpcyBjb21wb3VuZGVkIHNlbWlhbm51YWxseS4gQSB6ZXJvIGNvdXBvbiBib25kIHRoYXQgcGF5cyB0aGUgcGFyIHZhbHVlIDIwIHllYXJzIGZyb20gbm93IHdpbGwgYmUgcHJpY2VkIGF0IGhvdyBtdWNoIG9mIGl0cyBwYXIgdmFsdWU/CiRyPThcJSxtPTIsbj0yMCQgCiQkClxmcmFje1ByaWNlfXtGfSA9IFxmcmFjezF9eygxK1xmcmFje3J9e219KV57bm19fT0gXGZyYWN7MX17KDErXGZyYWN7OFwlfXsyfSleezIwXGNkb3QyfX0KJCQKYGBge3J9CjEvKCgxKygwLjA4LzIpKV4oMjAqMikpCmBgYApJZiB0aGUgYm9uZCBtYXR1cmVzIGluIDEwIHllYXJzIGluc3RlYWQgb2YgMjAgeWVhcnMsIHRoZSBwcmljZSB3aWxsIGJlIApgYGB7cn0KMS8oKDErKDAuMDgvMikpXigxMCoyKSkKYGBgCiMgTGV2ZWwgY291cG9uIGJvbmQKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KRlYgJj1cZnJhY3tDfXsoMStyKX0rLi4uK1xmcmFje0MrRn17KDErcilebn0gXFwKJj0gXGZyYWN7Rn17KDErcilebn0rXHN1bV97aT0xfV57bn1DKDErcileey1pfSBcXAomPSBcZnJhY3tGfXsoMStyKV5ufSArQ1xmcmFjezEtKDErcilebn17cn0KXGVuZHthbGlnbmVkfQpcZW5ke2VxdWF0aW9ufQokJApHZW5lcmFsIGNhc2Ugd2l0aCAkbSQgY291cG9uIHBlciBhbm51bS4gCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CkZWICY9IFxmcmFje0Z9eygxK1xmcmFje3J9e219KV57bm19fSArQ1xmcmFjezEtKDErXGZyYWN7cn17bX0pXntubX19e1xmcmFje3J9e219fSAKXGVuZHthbGlnbmVkfQpcZW5ke2VxdWF0aW9ufQokJApEZWZpbmUgY291cG9uICRDJCAgaXMgZ2l2ZW4gYnkgdGhlIHBhciB2YWx1ZSAkRiQsIHRoZSBjb3Vwb24gcmF0ZSAkYyQgYW5kIHRoZSBjb21wb3VuZGluZyBmcmVxdWVuY3kgJG0kLCBzdWNoIHRoYXQgCiQkCkM9XGZyYWN7RmN9e219CiQkCgpFeGFtcGxlIAoxNSUgQkVZLCAxMCB5ZWFycyBib25kIHdpdGggY29tcG91bmQgcmF0ZSBvZiAxMCUgcGFpZCBzZW1pYW5udWFsbHkgc2hvdWxkIHNlbGwgZm9yIAooSGludDogYXNzdW1lIHRoZSBwYXIgdmFsdWUgaXMgMTAwKQpgYGB7cn0KKDEwMCowLjEvMikqKCgxLSgxKygwLjE1LzIpKV4oLTEwKjIpKS8oMC4xNS8yKSkrKDEwMC8oMSsoMC4xNS8yKSleKDEwKjIpKQpgYGAKCg==</div>
 
 
 </div>

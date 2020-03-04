@@ -1,5 +1,5 @@
 ---
-title: "In class practice "
+title: "HW1"
 author: "Lowson Li"
 output:
   html_notebook:
@@ -23,28 +23,4 @@ editor_options:
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
-# Future value 
-```{r}
-
-```
-# Cash flow 
-```{r}
-
-```
-# Conversion between compouding methods 
-## (insert formula)
-## Example 
-Consider interest rate of 10% with quarterly compounding. What's the equivelent rate with continunous rate?
-```{r}
-4*log(1+(0.1/4))
-```
-
-# Annuity 
-## (insert formula)
-## Example 
-
-```{r}
-100*((1-(1.0625)^(-5)/0.0625))
-```
-
 
