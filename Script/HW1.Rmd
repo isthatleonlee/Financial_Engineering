@@ -24,3 +24,24 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 
+# Data generating proccess
+```{r}
+# define function 
+dgp <- function(p, n, r) { # p:principal, n:number of periods, r:interest rate
+  pp <<- c(rep(round(p / n), n - 1), p - round(p / n) * (n - 1)) # generate divided principal
+  left <<- p - cumsum(pp) # generate unpaid loans
+  left <<- c(p, left[1:n - 1]) # adjust first element: principal
+  rr <<- left * (r / 12) # calculate the monthly interest
+  total <<- pp + rr # total money paid
+  cumsum_total <<- cumsum(total) # cummulative sum of total
+  data <- data.frame( # Some data cleaning
+    principal = pp,
+    interest = rr,
+    cumsum_total = cumsum_total
+  )
+}
+```
+```{r}
+dgp(10000000000,24,0.07)
+```
+

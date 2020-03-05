@@ -161,9 +161,9 @@ If the bond matures in 10 years instead of 20 years, the price will be
 $$
 \begin{equation}
 \begin{aligned}
-FV &=\frac{C}{(1+r)}+...+\frac{C+F}{(1+r)^n} \\
+P &=\frac{C}{(1+r)}+...+\frac{C+F}{(1+r)^n} \\
 &= \frac{F}{(1+r)^n}+\sum_{i=1}^{n}C(1+r)^{-i} \\
-&= \frac{F}{(1+r)^n} +C\frac{1-(1+r)^n}{r}
+&= \frac{F}{(1+r)^n} +C\frac{1-(1+r)^{-n}}{r}
 \end{aligned}
 \end{equation}
 $$
@@ -171,7 +171,7 @@ General case with $m$ coupon per annum.
 $$
 \begin{equation}
 \begin{aligned}
-FV &= \frac{F}{(1+\frac{r}{m})^{nm}} +C\frac{1-(1+\frac{r}{m})^{nm}}{\frac{r}{m}} 
+P &= \frac{F}{(1+\frac{r}{m})^{nm}} +C\frac{1-(1+\frac{r}{m})^{-nm}}{\frac{r}{m}} 
 \end{aligned}
 \end{equation}
 $$
@@ -185,5 +185,23 @@ Example
 (Hint: assume the par value is 100)
 ```{r}
 (100*0.1/2)*((1-(1+(0.15/2))^(-10*2))/(0.15/2))+(100/(1+(0.15/2))^(10*2))
+```
+
+Example 
+15 years, 9% coupon rate 
+```{r}
+# define yield-price function 
+cal_price <- function(n, c, m) {
+  p <- c()
+  s <- seq(0.075, 0.105, 0.005)
+  for (i in 1:length(s)) {
+    p[i] <- 100 / ((1 + s[i] / m)^(n * m)) + (100 * c / m) * ((1 - (1 + (s[i] / m))^(-n * m)) / (s[i] / m))
+  }
+  return(p)
+}
+```
+```{r}
+# calculate the prices under different yield 
+cal_price(15, 0.09, 2)
 ```
 
