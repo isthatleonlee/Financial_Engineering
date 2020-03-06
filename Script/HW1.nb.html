@@ -368,11 +368,41 @@ div.tocify {
 <h1><span class="header-section-number">1</span> Load packages</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmxpYnJhcnkoa25pdHIpXG5saWJyYXJ5KGthYmxlRXh0cmEpXG5gYGAifQ== -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(knitr)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2RwbHlyJzpcbiAgbWV0aG9kICAgICAgICAgICBmcm9tXG4gIHByaW50LnJvd3dpc2VfZGYgICAgIFxuXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
+<pre><code>Registered S3 method overwritten by 'dplyr':
+  method           from
+  print.rowwise_df     
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShrbml0cilcbmxpYnJhcnkoa2FibGVFeHRyYSlcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
 <span class="kw">library</span>(kableExtra)</code></pre></div>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdodG1sdG9vbHMnOlxuICBtZXRob2QgICAgICAgICAgICAgICBmcm9tICAgICAgICAgXG4gIHByaW50Lmh0bWwgICAgICAgICAgIHRvb2xzOnJzdHVkaW9cbiAgcHJpbnQuc2hpbnkudGFnICAgICAgdG9vbHM6cnN0dWRpb1xuICBwcmludC5zaGlueS50YWcubGlzdCB0b29sczpyc3R1ZGlvXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhrYWJsZUV4dHJh4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6ZHBseXLigJk6XG5cbiAgICBncm91cF9yb3dzXG4ifQ== -->
+<pre><code>Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+
+Attaching package: ‘kableExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    group_rows</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -380,9 +410,10 @@ div.tocify {
 <h1><span class="header-section-number">2</span> Data generating proccess</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZWZpbmUgZnVuY3Rpb24gXG5kZ3AgPC0gZnVuY3Rpb24ocCwgbiwgcikgeyAjIHA6cHJpbmNpcGFsLCBuOm51bWJlciBvZiBwZXJpb2RzLCByOmludGVyZXN0IHJhdGVcbiAgcHAgPDwtIGMocmVwKHJvdW5kKHAgLyBuKSwgbiAtIDEpLCBwIC0gcm91bmQocCAvIG4pICogKG4gLSAxKSkgIyBnZW5lcmF0ZSBkaXZpZGVkIHByaW5jaXBhbFxuICBsZWZ0IDw8LSBwIC0gY3Vtc3VtKHBwKSAjIGNhbGN1bGF0ZSB1bnBhaWQgbG9hbnNcbiAgbGVmdCA8PC0gYyhwLCBsZWZ0WzE6biAtIDFdKSAjIGFkanVzdCBmaXJzdCBlbGVtZW50OiBwcmluY2lwYWxcbiAgcnIgPDwtIHJvdW5kKGxlZnQgKiAociAvIDEyKSkgIyBjYWxjdWxhdGUgdGhlIG1vbnRobHkgaW50ZXJlc3RcbiAgdG90YWwgPDwtIHBwICsgcnIgIyB0b3RhbCBtb25leSBwYWlkXG4gIGN1bXN1bV90b3RhbCA8PC0gY3Vtc3VtKHRvdGFsKSAjIGN1bW11bGF0aXZlIHN1bSBvZiB0b3RhbFxuICBkYXRhX2dlbmVyYXRlZCA8PC0gZGF0YS5mcmFtZSggIyBTb21lIGRhdGEgY2xlYW5pbmdcbiAgICBwcmVpb2QgPSBjKDE6bilcbiAgICBwcmluY2lwYWwgPSBwcCxcblxuYGBgIn0= -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define function </span>
-dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, n, r) { <span class="co"># p:principal, n:number of periods, r:interest rate</span>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZWZpbmUgZnVuY3Rpb25cbmRncCA8LSBmdW5jdGlvbihwLCB5LCByKSB7ICMgcDpwcmluY2lwYWwseTpudW1iZXIgb2YgeWVhcnMsIHI6aW50ZXJlc3QgcmF0ZVxuICBuIDwtIDEyICogeSAjIG46bnVtYmVyIG9mIHBlcmlvZHNcbiAgcHAgPDwtIGMocmVwKHJvdW5kKHAgLyBuKSwgbiAtIDEpLCBwIC0gcm91bmQocCAvIG4pICogKG4gLSAxKSkgIyBnZW5lcmF0ZSBkaXZpZGVkIHByaW5jaXBhbFxuICBsZWZ0IDw8LSBwIC0gY3Vtc3VtKHBwKSAjIGNhbGN1bGF0ZSB1bnBhaWQgbG9hbnNcbiAgbGVmdCA8PC0gYyhwLCBsZWZ0WzE6biAtIDFdKSAjIGFkanVzdCBmaXJzdCBlbGVtZW50OiBwcmluY2lwYWxcbiAgcnIgPDwtIHJvdW5kKGxlZnQgKiAociAvIDEyKSkgIyBjYWxjdWxhdGUgdGhlIG1vbnRobHkgaW50ZXJlc3RcbiAgdG90YWwgPDwtIHBwICsgcnIgIyB0b3RhbCBtb25leSBwYWlkXG4gIGN1bXN1bV90b3RhbCA8PC0gY3Vtc3VtKHRvdGFsKSAjIGN1bW11bGF0aXZlIHN1bSBvZiB0b3RhbFxuICBkYXRhX2dlbmVyYXRlZCA8PC0gZGF0YS5mcmFtZSggIyBTb21lIGRhdGEgY2xlYW5pbmdcbiAgICBwcmVpb2QgPSBjKDE6biksXG4gICAgcHJpbmNpcGFsID0gcHAsXG4gICAgaW50ZXJlc3QgPSBycixcbiAgICBjdW1zdW1fdG90YWwgPSBjdW1zdW1fdG90YWxcbiAgKVxufVxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define function</span>
+dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, y, r) { <span class="co"># p:principal,y:number of years, r:interest rate</span>
+  n &lt;-<span class="st"> </span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span>y <span class="co"># n:number of periods</span>
   pp &lt;&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">round</span>(p <span class="op">/</span><span class="st"> </span>n), n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), p <span class="op">-</span><span class="st"> </span><span class="kw">round</span>(p <span class="op">/</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># generate divided principal</span>
   left &lt;&lt;-<span class="st"> </span>p <span class="op">-</span><span class="st"> </span><span class="kw">cumsum</span>(pp) <span class="co"># calculate unpaid loans</span>
   left &lt;&lt;-<span class="st"> </span><span class="kw">c</span>(p, left[<span class="dv">1</span><span class="op">:</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="co"># adjust first element: principal</span>
@@ -390,14 +421,13 @@ dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, n, r) { <s
   total &lt;&lt;-<span class="st"> </span>pp <span class="op">+</span><span class="st"> </span>rr <span class="co"># total money paid</span>
   cumsum_total &lt;&lt;-<span class="st"> </span><span class="kw">cumsum</span>(total) <span class="co"># cummulative sum of total</span>
   data_generated &lt;&lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="co"># Some data cleaning</span>
-    <span class="dt">preiod =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>n)
-    <span class="dt">principal =</span> pp,</code></pre></div>
+    <span class="dt">preiod =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>n),
+    <span class="dt">principal =</span> pp,
+    <span class="dt">interest =</span> rr,
+    <span class="dt">cumsum_total =</span> cumsum_total
+  )
+}</code></pre></div>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IHVuZXhwZWN0ZWQgc3ltYm9sIGluOlxuXCIgICAgcHJlaW9kID0gYygxOm4pXG4gICAgcHJpbmNpcGFsXCJcbiJ9 -->
-<pre><code>Error: unexpected symbol in:
-&quot;    preiod = c(1:n)
-    principal&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -405,9 +435,9 @@ dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, n, r) { <s
 <h1><span class="header-section-number">3</span> Results</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZW5lcmF0ZSBkYXRhIFxuZGdwKDEwMDAwMDAwMDAwLDI0LDAuMDcpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZW5lcmF0ZSBkYXRhIFxuZGdwKDEwMDAwMDAwMDAwLCAyLCAwLjA3KVxuYGBgIn0= -->
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># generate data </span>
-<span class="kw">dgp</span>(<span class="dv">10000000000</span>,<span class="dv">24</span>,<span class="fl">0.07</span>)</code></pre></div>
+<span class="kw">dgp</span>(<span class="dv">10000000000</span>, <span class="dv">2</span>, <span class="fl">0.07</span>)</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
@@ -417,10 +447,10 @@ dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, n, r) { <s
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
-   <th style="text-align:right;"> preiod </th>
-   <th style="text-align:right;"> principal </th>
-   <th style="text-align:right;"> interest </th>
-   <th style="text-align:right;"> cumsum_total </th>
+   <th style="text-align:right;"> 期數 </th>
+   <th style="text-align:right;"> 本金(元) </th>
+   <th style="text-align:right;"> 利息(元) </th>
+   <th style="text-align:right;"> 本金利息累計(元) </th>
   </tr>
  </thead>
 <tbody>
@@ -578,7 +608,7 @@ dgp &lt;-<span class="st"> </span><span class="cf">function</span>(p, n, r) { <s
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFcxIgphdXRob3I6ICJMb3dzb24gTGksIFIwODMyMzAyMyIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0aGVtZTogc2ltcGxleAogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogeWVzCiAgaHRtbF9kb2N1bWVudDoKICAgIGRmX3ByaW50OiBwYWdlZAogICAgdG9jOiB5ZXMKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogaW5saW5lCi0tLQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRSwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAojIExvYWQgcGFja2FnZXMKYGBge3J9CmxpYnJhcnkoZHBseXIpCmxpYnJhcnkoa25pdHIpCmxpYnJhcnkoa2FibGVFeHRyYSkKYGBgCgojIERhdGEgZ2VuZXJhdGluZyBwcm9jY2VzcwpgYGB7cn0KIyBkZWZpbmUgZnVuY3Rpb24gCmRncCA8LSBmdW5jdGlvbihwLCBuLCByKSB7ICMgcDpwcmluY2lwYWwsIG46bnVtYmVyIG9mIHBlcmlvZHMsIHI6aW50ZXJlc3QgcmF0ZQogIHBwIDw8LSBjKHJlcChyb3VuZChwIC8gbiksIG4gLSAxKSwgcCAtIHJvdW5kKHAgLyBuKSAqIChuIC0gMSkpICMgZ2VuZXJhdGUgZGl2aWRlZCBwcmluY2lwYWwKICBsZWZ0IDw8LSBwIC0gY3Vtc3VtKHBwKSAjIGNhbGN1bGF0ZSB1bnBhaWQgbG9hbnMKICBsZWZ0IDw8LSBjKHAsIGxlZnRbMTpuIC0gMV0pICMgYWRqdXN0IGZpcnN0IGVsZW1lbnQ6IHByaW5jaXBhbAogIHJyIDw8LSByb3VuZChsZWZ0ICogKHIgLyAxMikpICMgY2FsY3VsYXRlIHRoZSBtb250aGx5IGludGVyZXN0CiAgdG90YWwgPDwtIHBwICsgcnIgIyB0b3RhbCBtb25leSBwYWlkCiAgY3Vtc3VtX3RvdGFsIDw8LSBjdW1zdW0odG90YWwpICMgY3VtbXVsYXRpdmUgc3VtIG9mIHRvdGFsCiAgZGF0YV9nZW5lcmF0ZWQgPDwtIGRhdGEuZnJhbWUoICMgU29tZSBkYXRhIGNsZWFuaW5nCiAgICBwcmVpb2QgPSBjKDE6biksCiAgICBwcmluY2lwYWwgPSBwcCwKICAgIGludGVyZXN0ID0gcnIsCiAgICBjdW1zdW1fdG90YWwgPSBjdW1zdW1fdG90YWwKICApCn0KYGBgCiMgUmVzdWx0cwpgYGB7cn0KIyBnZW5lcmF0ZSBkYXRhIApkZ3AoMTAwMDAwMDAwMDAsMjQsMC4wNykKYGBgCmBgYHtyfQojIHNob3dpbmcgdGFibGUgCmRhdGFfZ2VuZXJhdGVkICU+JSAKICBrbml0cjo6a2FibGUoKSAlPiUKICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gInN0cmlwZWQiLCBmdWxsX3dpZHRoID0gRikKYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFcxIgphdXRob3I6ICJMb3dzb24gTGksIFIwODMyMzAyMyIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0aGVtZTogc2ltcGxleAogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogeWVzCiAgaHRtbF9kb2N1bWVudDoKICAgIGRmX3ByaW50OiBwYWdlZAogICAgdG9jOiB5ZXMKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogaW5saW5lCi0tLQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRSwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAojIExvYWQgcGFja2FnZXMKYGBge3J9CmxpYnJhcnkoZHBseXIpCmxpYnJhcnkoa25pdHIpCmxpYnJhcnkoa2FibGVFeHRyYSkKYGBgCgojIERhdGEgZ2VuZXJhdGluZyBwcm9jY2VzcwpgYGB7cn0KIyBkZWZpbmUgZnVuY3Rpb24KZGdwIDwtIGZ1bmN0aW9uKHAsIHksIHIpIHsgIyBwOnByaW5jaXBhbCx5Om51bWJlciBvZiB5ZWFycywgcjppbnRlcmVzdCByYXRlCiAgbiA8LSAxMiAqIHkgIyBuOm51bWJlciBvZiBwZXJpb2RzCiAgcHAgPDwtIGMocmVwKHJvdW5kKHAgLyBuKSwgbiAtIDEpLCBwIC0gcm91bmQocCAvIG4pICogKG4gLSAxKSkgIyBnZW5lcmF0ZSBkaXZpZGVkIHByaW5jaXBhbAogIGxlZnQgPDwtIHAgLSBjdW1zdW0ocHApICMgY2FsY3VsYXRlIHVucGFpZCBsb2FucwogIGxlZnQgPDwtIGMocCwgbGVmdFsxOm4gLSAxXSkgIyBhZGp1c3QgZmlyc3QgZWxlbWVudDogcHJpbmNpcGFsCiAgcnIgPDwtIHJvdW5kKGxlZnQgKiAociAvIDEyKSkgIyBjYWxjdWxhdGUgdGhlIG1vbnRobHkgaW50ZXJlc3QKICB0b3RhbCA8PC0gcHAgKyByciAjIHRvdGFsIG1vbmV5IHBhaWQKICBjdW1zdW1fdG90YWwgPDwtIGN1bXN1bSh0b3RhbCkgIyBjdW1tdWxhdGl2ZSBzdW0gb2YgdG90YWwKICBkYXRhX2dlbmVyYXRlZCA8PC0gZGF0YS5mcmFtZSggIyBTb21lIGRhdGEgY2xlYW5pbmcKICAgIHByZWlvZCA9IGMoMTpuKSwKICAgIHByaW5jaXBhbCA9IHBwLAogICAgaW50ZXJlc3QgPSByciwKICAgIGN1bXN1bV90b3RhbCA9IGN1bXN1bV90b3RhbAogICkKfQpgYGAKIyBSZXN1bHRzCmBgYHtyfQojIGdlbmVyYXRlIGRhdGEgCmRncCgxMDAwMDAwMDAwMCwgMiwgMC4wNykKYGBgCmBgYHtyfQojIHNob3dpbmcgdGFibGUKZGF0YV9nZW5lcmF0ZWQgJT4lCiAgcmVuYW1lKGDmnJ/mlbhgID0gcHJlaW9kLCBg5pys6YeRKOWFgylgID0gcHJpbmNpcGFsLCBg5Yip5oGvKOWFgylgID0gaW50ZXJlc3QsIGDmnKzph5HliKnmga/ntK/oqIgo5YWDKWAgPSBjdW1zdW1fdG90YWwpICU+JQogIGtuaXRyOjprYWJsZSgpICU+JQogIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAic3RyaXBlZCIsIGZ1bGxfd2lkdGggPSBGKQpgYGAKCgo=</div>
 
 
 </div>

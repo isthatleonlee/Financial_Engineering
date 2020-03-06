@@ -32,8 +32,9 @@ library(kableExtra)
 
 # Data generating proccess
 ```{r}
-# define function 
-dgp <- function(p, n, r) { # p:principal, n:number of periods, r:interest rate
+# define function
+dgp <- function(p, y, r) { # p:principal,y:number of years, r:interest rate
+  n <- 12 * y # n:number of periods
   pp <<- c(rep(round(p / n), n - 1), p - round(p / n) * (n - 1)) # generate divided principal
   left <<- p - cumsum(pp) # calculate unpaid loans
   left <<- c(p, left[1:n - 1]) # adjust first element: principal
@@ -51,11 +52,12 @@ dgp <- function(p, n, r) { # p:principal, n:number of periods, r:interest rate
 # Results
 ```{r}
 # generate data 
-dgp(10000000000,24,0.07)
+dgp(10000000000, 2, 0.07)
 ```
 ```{r}
-# showing table 
-data_generated %>% 
+# showing table
+data_generated %>%
+  rename(`期數` = preiod, `本金(元)` = principal, `利息(元)` = interest, `本金利息累計(元)` = cumsum_total) %>%
   knitr::kable() %>%
   kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
 ```
