@@ -2,6 +2,9 @@
 title: "HW1"
 author: "Lowson Li, R08323023"
 output:
+  html_document:
+    df_print: paged
+    toc: yes
   html_notebook:
     code_folding: show
     highlight: tango
@@ -11,9 +14,6 @@ output:
     toc_float:
       collapsed: yes
       smooth_scroll: yes
-  html_document:
-    df_print: paged
-    toc: yes
   pdf_document:
     toc: yes
 editor_options:
