@@ -20,6 +20,9 @@ Install [R](https://www.r-project.org) and [RStudio](https://rstudio.com)
 ### R Project Set Up
 ![R Project Set Up](https://raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png "R Project Set Up")
 
+### Codes
+Linked `nb.html` file is for demonstation. For executing the code, please go to the `Script` directory and find the `.rmd` file with the same file name.
+
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]:https://www.linkedin.com/in/isthatlowsonli
