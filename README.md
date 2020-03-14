@@ -6,6 +6,10 @@ This is the repo for NTU course, Financial Engineering
 * Student ID: R08323023
 * Department: Economics, first year of postgraduate
 
+## Academic portfolio
+Learnings, in-class practices and notes here. 
+* [Aportfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+
 ## HW
 * [HW1](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW1.nb.html)
 

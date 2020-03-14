@@ -206,4 +206,38 @@ cal_price <- function(n, c, m) {
 cal_price(15, 0.09, 2)
 ```
 
+# Bond price when sell
+## Accrued interest 
+* Let $\omega$ be the remaining portions of coupon when sell.
+The accrued interest (應計利息) will be 
 
+$$
+AI = C \times (1-\omega)
+$$
+### Method to calculate the days (TBD)
+## Present value when sell
+* In UK and US, the quoted price does not inclue the accrued interest, this is call clean price / flat price. 
+
+The present value of the bonds when sell:
+
+$$
+\begin{equation}
+\begin{aligned}
+PV &=clean \ price + AI = \frac{C}{(1+\frac{r}{m})^{\omega}}+...+\frac{C+F}{(1+\frac{r}{m})^{\omega+n-1}} \\
+&= \frac{F}{(1+\frac{r}{m})^{\omega+n-1}}+\sum_{i=0}^{n-1} \frac{C}{(1+\frac{r}{m})^{\omega+i}} \\
+\end{aligned}
+\end{equation}
+$$
+Example(TBD):
+
+# Bond price volatility
+## Duration 
+### Macaulay duration (MD)
+### Modified duration 
+Example: Modified duration 11.54, change in yield 0.1%, the price should **decrease 1.154%**
+
+### Effective duration 
+
+
+## Convexity 
+## Immutization
