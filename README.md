@@ -8,7 +8,7 @@ This is the repo for NTU course, Financial Engineering
 
 ## Academic portfolio
 Learnings, in-class practices and notes here. 
-* [Aportfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+* [Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
 
 ## HW
 * [HW1](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW1.nb.html)
