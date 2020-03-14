@@ -158,32 +158,33 @@ If the bond matures in 10 years instead of 20 years, the price will be
 1/((1+(0.08/2))^(10*2))
 ```
 # Level coupon bond
+
+* Invester will received coupon each period.
+* Denote par value $F$, annual counpon rate $c$ and the coupon received in each period $C$.
+* The total number of periods is $n$.
+* Assume the interest compound $m$ times annualy, the general price formula of the level coupon bond is:
+
 $$
 \begin{equation}
 \begin{aligned}
-P &=\frac{C}{(1+r)}+...+\frac{C+F}{(1+r)^n} \\
-&= \frac{F}{(1+r)^n}+\sum_{i=1}^{n}C(1+r)^{-i} \\
-&= \frac{F}{(1+r)^n} +C\frac{1-(1+r)^{-n}}{r}
+P &=\frac{C}{(1+\frac{r}{m})}+...+\frac{C+F}{(1+\frac{r}{m})^n} \\
+&= \frac{F}{(1+\frac{r}{m})^n}+\sum_{i=1}^{n}C(1+\frac{r}{m})^{-i} \\
+&= \frac{F}{(1+\frac{r}{m})^n} +C\frac{1-(1+\frac{r}{m})^{-n}}{r}
 \end{aligned}
 \end{equation}
 $$
-General case with $m$ coupon per annum. 
-$$
-\begin{equation}
-\begin{aligned}
-P &= \frac{F}{(1+\frac{r}{m})^{nm}} +C\frac{1-(1+\frac{r}{m})^{-nm}}{\frac{r}{m}} 
-\end{aligned}
-\end{equation}
-$$
-Define coupon $C$  is given by the par value $F$, the coupon rate $c$ and the compounding frequency $m$, such that 
-$$
-C=\frac{Fc}{m}
-$$
+where the coupon received at each period $C$ is given by $\frac{F \times c}{m} $.
 
 Example 
 15% BEY, 10 years bond with compound rate of 10% paid semiannually should sell for 
 (Hint: assume the par value is 100)
-```{r}
+
+* Without loss of generality, let par value $F=100$.
+* Interest rate $15\%$, $m=2$
+* Total number of periods $n=2 \times 10 = 20$
+* Coupon received at each period $C = \frac{100 \times 0.1}{2}$.
+
+```{r echo=TRUE}
 (100*0.1/2)*((1-(1+(0.15/2))^(-10*2))/(0.15/2))+(100/(1+(0.15/2))^(10*2))
 ```
 
@@ -204,4 +205,5 @@ cal_price <- function(n, c, m) {
 # calculate the prices under different yield 
 cal_price(15, 0.09, 2)
 ```
+
 
