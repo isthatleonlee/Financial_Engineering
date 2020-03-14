@@ -10,7 +10,7 @@ This is the repo for NTU course, Financial Engineering
 Learnings, in-class practices and notes here. 
 * [Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
 
-## HW
+## Homework
 The concept and the coding strategy are described on the first section of each file.
 
 | Week | Demo | Source |
