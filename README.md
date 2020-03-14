@@ -13,6 +13,12 @@ Learnings, in-class practices and notes here.
 ## HW
 * [HW1](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW1.nb.html)
 
+| Week | Demo | Source |
+|---|---|---|
+|1|[Demo](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW1.nb.html)|[Source](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW1.Rmd)|
+
+
+
 ## Getting Started
 
 I use R for analysis. Please follow the instruction for executing the code.
