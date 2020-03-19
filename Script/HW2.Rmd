@@ -60,4 +60,7 @@ ytm(price = 103.72,
     m = 1)
 ```
 
+# Reference
+[YTM code practice from DataCamp](https://campus.datacamp.com/courses/bond-valuation-and-analysis-in-r/yield-to-maturity?ex=12)
 
+[`uniroot` function documentation](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/uniroot)
