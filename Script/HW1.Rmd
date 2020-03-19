@@ -30,6 +30,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 
 ![](https://i.imgur.com/gB1z0C1.png)
 
+For more details of the code, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+
 # Load packages
 ```{r}
 library(dplyr)

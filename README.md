@@ -12,6 +12,7 @@ Learnings, in-class practices and notes here.
 
 ## Homework
 The concept and the coding strategy are described on the first section of each file.
+Flow chart is embeded in the demo.
 
 | Week | Demo | Source |
 |---|---|---|
