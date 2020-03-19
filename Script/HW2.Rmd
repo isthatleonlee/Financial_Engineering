@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 
 * For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
  + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW2.Rmd)
- + [Academic Profilio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+ + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
 
 # Load packages
 ```{r}
