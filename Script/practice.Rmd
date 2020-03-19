@@ -233,11 +233,36 @@ Example(TBD):
 # Bond price volatility
 ## Duration 
 ### Macaulay duration (MD)
+
+(insert formula)
+
 ### Modified duration 
+
+(insert formula)
+
 Example: Modified duration 11.54, change in yield 0.1%, the price should **decrease 1.154%**
 
 ### Effective duration 
 
+(insert formula)
 
 ## Convexity 
+
+(insert formula)
+
 ## Immutization
+
+# Spot rate 
+Compare the different bonds to the present base.
+Change the coumpound rate in coupon bonds to sigle rate. 
+Useful when you have investment profolio.
+
+(insert formula)
+
+# Forward rate 
+
+(insert formula)
+(insert example)
+
+
+

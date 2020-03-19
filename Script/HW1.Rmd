@@ -30,7 +30,11 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 
 ![](https://i.imgur.com/gB1z0C1.png)
 
-For more details of the code, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+* For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+ + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW1.Rmd)
+ + [Academic Profilio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+
+
 
 # Load packages
 ```{r}
