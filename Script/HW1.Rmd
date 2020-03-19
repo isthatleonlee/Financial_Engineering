@@ -28,6 +28,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 2. For the code, I first tried to generate the equal principal and rounded it, then calculate the unpaid loans to find the monthly interest. Finally, I can get the total money paid.
 3. I can use these logic to write a function which generating the table under given parameters.
 
+![](https://i.imgur.com/gB1z0C1.png)
+
 # Load packages
 ```{r}
 library(dplyr)
