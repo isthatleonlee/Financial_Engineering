@@ -175,8 +175,8 @@ forward_rate <- function(begin_year, duration_in_year, price_begin, price_end, p
 forward_rate(begin_year = 3,duration_in_year = 2,price_begin = 83,price_end = 67.43)
 ```
 
-### Save in matrix form
-## Define function
+## Save in matrix form
+### Define function
 ```{r echo=TRUE}
 # create and save forward rates in matrix
 forward_rates <- function(price_begin, price_end, periods = 5, par = 100) {
@@ -198,7 +198,7 @@ forward_rates <- function(price_begin, price_end, periods = 5, par = 100) {
 }
 ```
 
-## Results
+### Results
 ```{r}
 forward_rates(price_begin = 83, price_end = 67.43)
 ```
