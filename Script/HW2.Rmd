@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 # Strategy
 1. Try to replicate the [YTM calculator](https://www.calkoo.com/en/ytm-calculator)
-2. 
+2. Try to replicate the spot rate examples from [綠角](http://greenhornfinancefootnote.blogspot.com/2010/06/how-to-compute-theoretical-spot-rates.html)
 
 
 * For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
@@ -40,25 +40,140 @@ library(kableExtra)
 ```
 
 # YTM calculator 
+
+* Use the data from [Bloomberg](https://www.bloomberg.com/markets/rates-bonds/government-bonds/us)
+![](https://i.imgur.com/zNk7Zc6.png)
+
+## Define function
 ```{r}
 # define function
-ytm <- function(price, par = 100, r, c, y, m) { # price:current bond price, par: bond par value(with default value $100), c: bond coupon rate, y: years to maturity, m: compounded period per year
-  cash_flow <<- c(-price, rep(par * c / m, y * m - 1), par * c / m + par) # create cash flow vector
-  object_function <<- function(r, cash_flow, t = seq(along = cash_flow)) sum(cash_flow / (1 + r)^t) # setting the objective function to find the YTM, represented as 'r'
+ytm <- function(price, par = 100, c, y, m) { # price:current bond price, par: bond par value(with default value $100), c: bond coupon rate, y: years to maturity, m: compounded period per year
+  cash_flow <<- c(rep(par * c / m, y * m - 1), par * c / m + par) # create cash flow vector
+  objective_fn <<- function(r, cash_flow, t = seq(along = cash_flow)) sum(-price,cash_flow / (1 + r)^t) # setting the objective function to find the YTM, represented as 'r'
 
-  ytm_ans <<- uniroot(f = object_function, interval = c(0, 1), cash_flow = cash_flow)$root # find the root of the objective function
+  ytm_ans <<- uniroot(f = objective_fn, interval = c(0, 1), cash_flow = cash_flow)$root # find the root of the objective function
 
-  return(ytm_ans)
+  return(paste(round(ytm_ans, 5) * 100, "%"))
 }
 ```
 
-# Results
-```{r}
-ytm(price = 103.72,
-    c = 0.015,
-    y = 10,
-    m = 1)
+```{r echo=TRUE}
+# clean version 
+ytm <- function(price, par = 100, c, y, m) {
+  cash_flow <<- c(rep(par * c / m, y * m - 1), par * c / m + par)
+  objective_fn <<- function(r, cash_flow, t = seq(along = cash_flow)) sum(-price, cash_flow / (1 + r)^t)
+  ytm_ans <<- uniroot(f = objective_fn, interval = c(0, 1), cash_flow = cash_flow)$root
+  return(paste(round(ytm_ans, 5) * 100, "%"))
+}
 ```
+
+## Results
+
+* For bonds with 10 years to maturity (with Bloomberg data):
+
+```{r}
+ytm(price = 103.36, c = 0.015, y = 10, m = 1)
+```
+
+
+* Note: you can check the result by [online YTM calculator](https://www.calkoo.com/en/ytm-calculator)
+
+# Spot rate calculator
+## 綠角 example
+### Define function 
+
+* Assume compound semiannually
+* Try to find spot rate with YTM of zero-coupon bonds: 6 month & 12 month
+
+```{r echo=TRUE}
+# define function 
+spot_rate <- function(price, par = 100, c, m, six_mo_ytm, twelve_mo_ytm) {
+  cash_flow <<- c(rep(par * c / m, 2), par + par * c / m)
+  objective_fn <<- function(s, cash_flow, t = seq(from = 1, along = cash_flow)) sum(-price, cash_flow / (1 + c(six_mo_ytm / m, twelve_mo_ytm / m, s))^t)
+  spot_ans <<- uniroot(f = objective_fn, interval = c(0, 1), cash_flow = cash_flow)$root
+  return(paste(round(spot_ans * 2, 5) * 100, "%"))
+}
+```
+
+* More general case: with multiple spot rates/YTMs (Notice: the spot rates/YTMs should have same time interval and should provide them all at once)
+
+```{r echo=FALSE}
+# allow YTM to be vectors
+spot_rate_g <- function(price, par = 100, c, m, y, ytms) {
+  if (length(ytms) > y * m - 1) {
+    return(paste0("Too many spot rate/YTMs to proceed calculation!"))
+  } else if (length(ytms) < y * m - 1) {
+    return(paste0("No enough spot rate/YTMs to proceed calculation!"))
+  } else {
+    cash_flow <<- c(rep(par * c / m, y * m - 1), par + par * c / m)
+    objective_fn <<- function(s, cash_flow, t = seq(from = 1, along = cash_flow)) sum(-price, cash_flow / (1 + c(ytms / m, s))^t)
+    spot_ans <<- uniroot(f = objective_fn, interval = c(0, 1), cash_flow = cash_flow)$root
+    return(paste(round(spot_ans * m, 5) * 100, "%"))
+  }
+}
+```
+
+### Results
+* Calculate the spot rate per annum (with example from [綠角](http://greenhornfinancefootnote.blogspot.com/2010/06/how-to-compute-theoretical-spot-rates.html))
+
+```{r}
+# result
+spot_rate_g(price = 1029.1, par = 1000, c = 0.05, m = 2, y = 1.5, ytms =c(0.01, 0.02))
+```
+
+* For a level-coupon bond with price 1029.1, par value 1000, annual coupon rate 5%, compound twice per year and 1.5 year to maturity. Along with the spot rate for 6 months bond and 12 months bond 1% and 2% seperately, we have the equivelent spot rate 3.029 %.
+
+* If the spot rates of the zero-coupon bonds are **not enough** to calculate the spot rate of the given level-coupon bonds: new spot rates are generate from previous ones, this is called **boostraping**
+
+## Simple case
+
+* This is the simplified case for calculating the spot rate of the zero-coupon bond.
+* Methodology and examples [here](https://www.trignosource.com/finance/spot%20rate.html#Calculator)
+
+### Define function
+
+```{r echo=TRUE}
+# define function 
+simple_spot_rate <- function(t, price, par = 100) {
+  sp <<- (price/par)^(-1 / t) -1
+  sf <<- log(1 + sp)
+  sp_return <<- paste(t, "year spot rate of interest", round(sp * 100, 2), "%")
+  sf_return <<- paste(t, "year spot force of interest", round(sf * 100, 2), "%")
+  return(cat(sp_return, sf_return, sep = "\n"))
+}
+```
+
+### Results
+
+```{r}
+# result, with numbers from the website demo
+simple_spot_rate(t = 4, price = 68.30)
+```
+
+# Practice
+
+* Calculate bond price and YTM from spot rate
+
+```{r}
+# bond price calculator (from spot rates)
+bp <- function(par, c, spot_rates) {
+  bond_price <<- sum(par * c(rep(c, length(spot_rates) - 1), 1 + c) / (1 + spot_rates)^seq(along = spot_rates))
+  return(bond_price)
+}
+```
+
+```{r}
+# results
+bp(par = 1000, c = 0.09, spot_rates = c(0.06, 0.12, 0.13))
+```
+
+* Since we can calculate the bond price under given spot rates, we can also derive YTM:
+
+```{r}
+# results
+ytm(price = bond_price, par = 1000, c = 0.09, y = 3, m = 1)
+```
+
 
 # Reference
 [YTM code practice from DataCamp](https://campus.datacamp.com/courses/bond-valuation-and-analysis-in-r/yield-to-maturity?ex=12)
