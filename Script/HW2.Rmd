@@ -176,13 +176,41 @@ forward_rate(begin_year = 3,duration_in_year = 2,price_begin = 83,price_end = 67
 ```
 
 ### Save in matrix form
-(TBC)
+## Define function
+```{r echo=TRUE}
+# create and save forward rates in matrix
+forward_rates <- function(price_begin, price_end, periods = 5, par = 100) {
+  frs <<- c()
+  for (i in 0:periods) {
+    for (j in 0:periods) {
+      if (j > i) {
+        pb <<- price_begin / par
+        pe <<- price_end / par
+        fr <<- (pb / pe)^(1 / j - i) - 1
+        frs <<- c(frs,fr)
+      } else {
+        frs <<- c(frs,0)
+      }
+    }
+  }
+  mat<<-matrix(data = frs, nrow = periods+1, ncol =periods+1) %>% t()
+  return(mat)
+}
+```
+
+## Results
+```{r}
+forward_rates(price_begin = 83, price_end = 67.43)
+```
+
+* Note that the value in $(1,1)$ means $f(0,0)$, $(1,2)$ means $f(0,1)$
+* `R` follows mathematic tradition to index the value.
 
 # Practice
 
 * Calculate bond price and YTM from spot rate
 
-```{r}
+```{r echo=TRUE}
 # bond price calculator (from spot rates)
 bp <- function(par, c, spot_rates) {
   bond_price <<- sum(par * c(rep(c, length(spot_rates) - 1), 1 + c) / (1 + spot_rates)^seq(along = spot_rates))
