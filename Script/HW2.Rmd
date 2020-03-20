@@ -150,6 +150,34 @@ simple_spot_rate <- function(t, price, par = 100) {
 simple_spot_rate(t = 4, price = 68.30)
 ```
 
+# Forward rate calculator 
+
+## Simple case 
+
+* This is the simplified case for calculating the forward rate of the zero-coupon bond.
+* Methodology and examples [here](https://www.trignosource.com/finance/Forward%20rate.html#Calculator)
+
+### Define function 
+```{r echo=TRUE}
+forward_rate <- function(begin_year, duration_in_year, price_begin, price_end, par = 100) {
+  pb <<- price_begin / par
+  pe <<- price_end / par
+  fr <<- (pb / pe)^(1 / duration_in_year) - 1
+  ff <<- log(pb / pe) / duration_in_year
+  fr_return <<- paste(duration_in_year, "year forward rate of interest begining", begin_year, "years from now:", round(sp * 100, 2), "%")
+  ff_return <<- paste(duration_in_year, "year forward force of interest begining", begin_year, "years from now:", round(sf * 100, 2), "%")
+  return(cat(fr_return, ff_return, sep = "\n"))
+}
+```
+
+### Results
+```{r}
+forward_rate(begin_year = 3,duration_in_year = 2,price_begin = 83,price_end = 67.43)
+```
+
+### Save in matrix form
+(TBC)
+
 # Practice
 
 * Calculate bond price and YTM from spot rate
