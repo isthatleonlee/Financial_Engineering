@@ -26,7 +26,9 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 # Strategy
 1. Try to replicate the [YTM calculator](https://www.calkoo.com/en/ytm-calculator)
 2. Try to replicate the spot rate examples from [綠角](http://greenhornfinancefootnote.blogspot.com/2010/06/how-to-compute-theoretical-spot-rates.html) and [simple spot rate](https://www.trignosource.com/finance/spot%20rate.html#Calculator)
+3. Practice for other simple calculators.
 
+![](https://i.imgur.com/cSKZmtS.png)
 
 * For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
  + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW2.Rmd)
