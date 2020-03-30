@@ -373,9 +373,8 @@ FV = P(1+\frac{r}{m})^{nm}
 \]</span> Answer</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuMjAwMDAwMDAvKCgxKygwLjA3LzIpKV4oMS84KSlcblxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r 20000000/((1+(0.07/2))^(1/8))</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjAwMDAwMDAvKCgxKygwLjA3LzIpKV4oMS84KSlcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">20000000</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.07</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">8</span>))</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE5OTE0MTgxXG4ifQ== -->
 <pre><code>[1] 19914181</code></pre>
@@ -397,9 +396,8 @@ r_2 &amp;= m(e^{\frac{r_1}{m}}-1)
 \]</span> Example Consider interest rate of 10% with quarterly compounding. What’s the equivelent rate with continunous rate?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuNCpsb2coMSsoMC4xLzQpKVxuXG5gYGBcbmBgYCJ9 -->
-<p><code>r</code>r 4*log(1+(0.1/4))</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuNCpsb2coMSsoMC4xLzQpKVxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span><span class="op">*</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.1</span><span class="op">/</span><span class="dv">4</span>))</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDk4NzcwNDVcbiJ9 -->
 <pre><code>[1] 0.09877045</code></pre>
@@ -448,15 +446,22 @@ P=\sum_{i=1}^{mn}C(1+r)^{-i}  = C \frac{1-(1+\frac{r}{m}^{-nm})}{\frac{r}{m}}
 \]</span> Example The <span class="math inline">\(P\)</span> of an annuity of $100 per annum for 5 yeats at annual rate of 6.25% is</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBkZWZpbmUgYW5udWl0eSBmdW5jdGlvblxuY2FsX2FubnVpdHkgPC0gZnVuY3Rpb24oYywgciwgcCkge1xuICBhIDwtIDBcbiAgZm9yIChpIGluIDE6cCkge1xuICAgIHRlbXAgPC0gKDEgKyByKV4oLWkpXG4gICAgYSA8LSBhICsgdGVtcFxuICB9XG4gIHJldHVybihjICogYSlcbn1cbmBgYFxuYGBgIn0= -->
-<p><code>r</code>r # define annuity function cal_annuity &lt;- function(c, r, p) { a &lt;- 0 for (i in 1:p) { temp &lt;- (1 + r)^(-i) a &lt;- a + temp } return(c * a) }</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZWZpbmUgYW5udWl0eSBmdW5jdGlvblxuY2FsX2FubnVpdHkgPC0gZnVuY3Rpb24oYywgciwgcCkge1xuICBhIDwtIDBcbiAgZm9yIChpIGluIDE6cCkge1xuICAgIHRlbXAgPC0gKDEgKyByKV4oLWkpXG4gICAgYSA8LSBhICsgdGVtcFxuICB9XG4gIHJldHVybihjICogYSlcbn1cbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define annuity function</span>
+cal_annuity &lt;-<span class="st"> </span><span class="cf">function</span>(c, r, p) {
+  a &lt;-<span class="st"> </span><span class="dv">0</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>p) {
+    temp &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>r)<span class="op">^</span>(<span class="op">-</span>i)
+    a &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>temp
+  }
+  <span class="kw">return</span>(c <span class="op">*</span><span class="st"> </span>a)
+}</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBjYWxjdWxhdGUgYW5udWl0eVxuY2FsX2FubnVpdHkoMTAwLDAuMDYyNSw1KVxuXG5gYGBcbmBgYCJ9 -->
-<p><code>r</code>r # calculate annuity cal_annuity(100,0.0625,5)</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjYWxjdWxhdGUgYW5udWl0eVxuY2FsX2FubnVpdHkoMTAwLDAuMDYyNSw1KVxuYGBgIn0= -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate annuity</span>
+<span class="kw">cal_annuity</span>(<span class="dv">100</span>,<span class="fl">0.0625</span>,<span class="dv">5</span>)</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQxOC4zODY5XG4ifQ== -->
 <pre><code>[1] 418.3869</code></pre>
@@ -470,9 +475,8 @@ P=\sum_{i=1}^{mn}C(1+r)^{-i}  = C \frac{1-(1+\frac{r}{m}^{-nm})}{\frac{r}{m}}
 <p>Example Consider a 15-year, $250,000 loan at 8% interest rate, what’s the monthly payment? (Hint: use general annuity formula)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSlcblxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r 250000/((1-((1+(0.08/12))^(-12*15)))/(0.08/12))</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSlcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">250000</span><span class="op">/</span>((<span class="dv">1</span><span class="op">-</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">12</span>))<span class="op">^</span>(<span class="op">-</span><span class="dv">12</span><span class="op">*</span><span class="dv">15</span>)))<span class="op">/</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">12</span>))</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzODkuMTNcbiJ9 -->
 <pre><code>[1] 2389.13</code></pre>
@@ -493,9 +497,8 @@ Price = \frac{F}{(1+r)^n}
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuMS8oKDErKDAuMDgvMikpXigyMCoyKSlcblxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r 1/((1+(0.08/2))^(20*2))</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS8oKDErKDAuMDgvMikpXigyMCoyKSlcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">20</span><span class="op">*</span><span class="dv">2</span>))</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMjA4Mjg5XG4ifQ== -->
 <pre><code>[1] 0.208289</code></pre>
@@ -505,9 +508,8 @@ Price = \frac{F}{(1+r)^n}
 <p>If the bond matures in 10 years instead of 20 years, the price will be</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuMS8oKDErKDAuMDgvMikpXigxMCoyKSlcblxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r 1/((1+(0.08/2))^(10*2))</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS8oKDErKDAuMDgvMikpXigxMCoyKSlcbmBgYCJ9 -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>(<span class="fl">0.08</span><span class="op">/</span><span class="dv">2</span>))<span class="op">^</span>(<span class="dv">10</span><span class="op">*</span><span class="dv">2</span>))</code></pre></div>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNDU2Mzg2OVxuIn0= -->
 <pre><code>[1] 0.4563869</code></pre>
@@ -552,21 +554,27 @@ P &amp;=\frac{C}{(1+\frac{r}{m})}+...+\frac{C+F}{(1+\frac{r}{m})^n} \\
 <p>Example 15 years, 9% coupon rate</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICBmb3IgKGkgaW4gMTpsZW5ndGgocykpIHtcbiAgICBwW2ldIDwtIDEwMCAvICgoMSArIHNbaV0gLyBtKV4obiAqIG0pKSArICgxMDAgKiBjIC8gbSkoKDEgLSAoMSArIChzW2ldIC8gbSkpXigtbiAqIG0pKSAvIChzW2ldIC8gbSkpXG4gIH1cblxuYGBgIn0= -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(s)) {
-    p[i] &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>s[i] <span class="op">/</span><span class="st"> </span>m)<span class="op">^</span>(n <span class="op">*</span><span class="st"> </span>m)) <span class="op">+</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>c <span class="op">/</span><span class="st"> </span>m)((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(s[i] <span class="op">/</span><span class="st"> </span>m))<span class="op">^</span>(<span class="op">-</span>n <span class="op">*</span><span class="st"> </span>m)) <span class="op">/</span><span class="st"> </span>(s[i] <span class="op">/</span><span class="st"> </span>m))
-  }</code></pre></div>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZWZpbmUgeWllbGQtcHJpY2UgZnVuY3Rpb24gXG5jYWxfcHJpY2UgPC0gZnVuY3Rpb24obiwgYywgbSkge1xuICBwIDwtIGMoKVxuICBzIDwtIHNlcSgwLjA3NSwgMC4xMDUsIDAuMDA1KVxuICBmb3IgKGkgaW4gMTpsZW5ndGgocykpIHtcbiAgICBwW2ldIDwtIDEwMCAvICgoMSArIHNbaV0gLyBtKV4obiAqIG0pKSArICgxMDAgKiBjIC8gbSkgKiAoKDEgLSAoMSArIChzW2ldIC8gbSkpXigtbiAqIG0pKSAvIChzW2ldIC8gbSkpXG4gIH1cbiAgcmV0dXJuKHApXG59XG5gYGAifQ== -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define yield-price function </span>
+cal_price &lt;-<span class="st"> </span><span class="cf">function</span>(n, c, m) {
+  p &lt;-<span class="st"> </span><span class="kw">c</span>()
+  s &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.075</span>, <span class="fl">0.105</span>, <span class="fl">0.005</span>)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(s)) {
+    p[i] &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>s[i] <span class="op">/</span><span class="st"> </span>m)<span class="op">^</span>(n <span class="op">*</span><span class="st"> </span>m)) <span class="op">+</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>c <span class="op">/</span><span class="st"> </span>m) <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(s[i] <span class="op">/</span><span class="st"> </span>m))<span class="op">^</span>(<span class="op">-</span>n <span class="op">*</span><span class="st"> </span>m)) <span class="op">/</span><span class="st"> </span>(s[i] <span class="op">/</span><span class="st"> </span>m))
+  }
+  <span class="kw">return</span>(p)
+}</code></pre></div>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gKDEwMCAqIGMvbSkoKDEgLSAoMSArIChzW2ldL20pKV4oLW4gKiBtKSkvKHNbaV0vbSkpIDogXG4gIGF0dGVtcHQgdG8gYXBwbHkgbm9uLWZ1bmN0aW9uXG4ifQ== -->
-<pre><code>Error in (100 * c/m)((1 - (1 + (s[i]/m))^(-n * m))/(s[i]/m)) : 
-  attempt to apply non-function</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjYWxjdWxhdGUgdGhlIHByaWNlcyB1bmRlciBkaWZmZXJlbnQgeWllbGQgXG5jYWxfcHJpY2UoMTUsIDAuMDksIDIpXG5gYGAifQ== -->
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the prices under different yield </span>
 <span class="kw">cal_price</span>(<span class="dv">15</span>, <span class="fl">0.09</span>, <span class="dv">2</span>)</code></pre></div>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExMy4zNzE5MyAxMDguNjQ2MDIgMTA0LjE5NDc1IDEwMC4wMDAwMCAgOTYuMDQ0OTBcbls2XSAgOTIuMzEzNzcgIDg4Ljc5MjA3XG4ifQ== -->
+<pre><code>[1] 113.37193 108.64602 104.19475 100.00000  96.04490
+[6]  92.31377  88.79207</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -625,10 +633,241 @@ PV &amp;=clean \ price + AI = \frac{C}{(1+\frac{r}{m})^{\omega}}+...+\frac{C+F}{
 <div id="forward-rate" class="section level1">
 <h1><span class="header-section-number">11</span> Forward rate</h1>
 <p>(insert formula) (insert example)</p>
+</div>
+<div id="options" class="section level1">
+<h1><span class="header-section-number">12</span> Options</h1>
+<div id="definition" class="section level2">
+<h2><span class="header-section-number">12.1</span> Definition</h2>
+</div>
+<div id="types-of-options" class="section level2">
+<h2><span class="header-section-number">12.2</span> Types of options</h2>
+</div>
+<div id="payoff" class="section level2">
+<h2><span class="header-section-number">12.3</span> Payoff</h2>
+<div id="convinient-convetions" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Convinient convetions</h3>
+<ul>
+<li>C: call value (買權權利金)</li>
+<li>P:put value (賣權權利金)</li>
+<li>X/K: strike price (履約價)</li>
+<li>S: stock price (標的物現貨價格)</li>
+<li>D: dividends (是否有發股利)</li>
+</ul>
+</div>
+<div id="mathematic-representation" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> Mathematic representation</h3>
+<ul>
+<li>The payoff of a call at expriation is</li>
+</ul>
+<p><span class="math display">\[
+C = \max (0,S-X)
+\]</span></p>
+<p>When the <strong>stock price is lower than the strike pirce</strong> (S<X), the investor will give up call option. * The payoff of a pu at expriation is $$ P="\max" (0,X-S) $$ When the **stock price is higher than the strike pirce** (S>X), the investor will give up put option.</p>
+</div>
+</div>
+<div id="strategy" class="section level2">
+<h2><span class="header-section-number">12.4</span> Strategy</h2>
+<p>(insert image)</p>
+</div>
+<div id="terminology" class="section level2">
+<h2><span class="header-section-number">12.5</span> Terminology</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Option</th>
+<th align="center">Strike Price</th>
+<th align="center">Stock Price</th>
+<th align="center">Terminology</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Call</td>
+<td align="center">45</td>
+<td align="center">40</td>
+<td align="center"><strong>Out</strong>-of-the-money(放棄)</td>
+</tr>
+<tr class="even">
+<td align="center">Call</td>
+<td align="center">40</td>
+<td align="center">40</td>
+<td align="center">At-of-the-money</td>
+</tr>
+<tr class="odd">
+<td align="center">Call</td>
+<td align="center">35</td>
+<td align="center">40</td>
+<td align="center"><strong>In</strong>-of-the-money(賺錢)</td>
+</tr>
+<tr class="even">
+<td align="center">Put</td>
+<td align="center">80</td>
+<td align="center">100</td>
+<td align="center"><strong>Out</strong>-of-the-money(放棄)</td>
+</tr>
+<tr class="odd">
+<td align="center">Put</td>
+<td align="center">100</td>
+<td align="center">100</td>
+<td align="center">At-of-the-money</td>
+</tr>
+<tr class="even">
+<td align="center">Put</td>
+<td align="center">130</td>
+<td align="center">100</td>
+<td align="center"><strong>In</strong>-of-the-money(賺錢)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="straddle-vs.strangle" class="section level2">
+<h2><span class="header-section-number">12.6</span> Straddle vs. strangle</h2>
+<p>(strategy)</p>
+</div>
+<div id="option-pricing-model" class="section level2">
+<h2><span class="header-section-number">12.7</span> Option pricing model</h2>
+</div>
+<div id="black-scholes-model" class="section level2">
+<h2><span class="header-section-number">12.8</span> Black-Scholes Model</h2>
+<p>Also called Black-Scholes-Merton Model</p>
+<div id="basic-assumptions" class="section level3">
+<h3><span class="header-section-number">12.8.1</span> Basic assumptions</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Assumptions</th>
+<th align="center">Violation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">資本市場完美、沒有稅或交易成本、股票價格沒有上下限、任何五票可以無限分割、可無限賣空</td>
+<td align="center">景氣不好的時候政府可能會禁止賣空</td>
+</tr>
+<tr class="even">
+<td align="center">股價取對數後符合常態分配</td>
+<td align="center">有可能會集中在某些區間</td>
+</tr>
+<tr class="odd">
+<td align="center">若令股價過程為常態分配，股價可能值將從負無窮大到正無窮大</td>
+<td align="center">真實股價沒有負值</td>
+</tr>
+<tr class="even">
+<td align="center">無風險利率、股票報酬率的波動度為常數</td>
+<td align="center">FED常更改無風險利率通常隨季度調整、波動不為常數</td>
+</tr>
+<tr class="odd">
+<td align="center">選擇權存續期間，股票不發放任何股利</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">歐式選擇權，只能在到期日時履約</td>
+<td align="center">還有美式選擇權</td>
+</tr>
+<tr class="odd">
+<td align="center">標的股票不會違約</td>
+<td align="center">有可能股票會下市</td>
+</tr>
+<tr class="even">
+<td align="center">股價是連續的，不會有突發性股價跳空的情況發生</td>
+<td align="center">最近常跳空</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="formula" class="section level3">
+<h3><span class="header-section-number">12.8.2</span> Formula</h3>
+$$
+<span class="math display">\[\begin{equation}
+\begin{aligned}
+c &amp;= S_{0}N(d_{1})-Ke^{-rT}N(d_{2}) \\
+p &amp;= Ke^{-rT}N(-d_{2})-S_{0}N(-d_{1}) \\
+
+where \ \  d_{1} &amp;=  \frac{\ln(S_{0}/K)+(r+\sigma^{2}/2)T}{\sigma \sqrt(T)} \\
+d_{2} &amp;=  \frac{\ln(S_{0}/K)+(r-\sigma^{2}/2)T}{\sigma \sqrt(T)} = \sigma \sqrt(T) \\
+\end{aligned}
+\end{equation}\]</span>
+<p>$$</p>
+<ul>
+<li>Concept: 現價(<span class="math inline">\(S_{0}\)</span>) 服從常態分佈，履約價(<span class="math inline">\(K\)</span>)要折現回來，服從常態分佈。<span class="math inline">\(\sigma\)</span>為標的物波動率(估計)。<span class="math inline">\(r\)</span>為無風險利率。</li>
+</ul>
+</div>
+<div id="put-call-parity" class="section level3">
+<h3><span class="header-section-number">12.8.3</span> Put Call Parity</h3>
+<ul>
+<li>買賣權平價關係</li>
+</ul>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+C+Xe^{-rT} &amp;= P+S \\
+where \ \  C &amp;= call \ premium \\
+Xe^{-rT} &amp;= present \ value \ of \ the \ strike \\
+P &amp;= put \ premium \\ 
+S &amp;= the \ current \ price \ of \ the \ underline \\ 
+\end{aligned}
+\end{equation}
+\]</span> * Geometric Bronian Motion</p>
+<p><span class="math display">\[
+\mathrm{d}S_{t} := \mu S_{t}\mathrm{d}d_{t} +\sigma S_{t} \mathrm{d}B_{t}, 0\leq t \leq T
+\]</span> where <span class="math inline">\(S_{t}\)</span> is the stock price at time <span class="math inline">\(t\)</span>, <span class="math inline">\(\mu\)</span> is the drift rate(股價年收益率的期望值),<span class="math inline">\(\sigma\)</span> is the volatility of the price in years, <span class="math inline">\(B_{t}\)</span> is the Brownian motion. Notice that <span class="math inline">\(\mu, \sigma\)</span> are constants.</p>
+</div>
+</div>
+<div id="option-greek" class="section level2">
+<h2><span class="header-section-number">12.9</span> Option greek</h2>
+<table style="width:33%;">
+<colgroup>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Greek</th>
+<th align="left">Measure</th>
+<th align="left">Affected by</th>
+<th align="left">Affects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Delta</td>
+<td align="left">Impact of underlying price move(per $1)</td>
+<td align="left">Time until expiration, volatility, gamma, price</td>
+<td align="left">Option Price</td>
+</tr>
+<tr class="even">
+<td align="left">Gamma</td>
+<td align="left">Impact of underlying price move(per $1)</td>
+<td align="left">Time until expiration, volatility, price</td>
+<td align="left">Delta</td>
+</tr>
+<tr class="odd">
+<td align="left">Theta</td>
+<td align="left">Impact of passage of time(per day)</td>
+<td align="left">Time until expiration, price, volatility</td>
+<td align="left">Option Price</td>
+</tr>
+<tr class="even">
+<td align="left">Vega</td>
+<td align="left">Impact of volatility change(per 1%)</td>
+<td align="left">Time until expiration, volatility</td>
+<td align="left">Option Price</td>
+</tr>
+<tr class="odd">
+<td align="left">Rho</td>
+<td align="left">Impact of interest rate change (per 1%)</td>
+<td align="left">Interest rate, time until expiration</td>
+<td align="left">Option Price</td>
+</tr>
+</tbody>
+</table>
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW4gY2xhc3MgcHJhY3RpY2UiCmF1dGhvcjogIkxvd3NvbiBMaSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0aGVtZTogc2ltcGxleAogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogeWVzCiAgaHRtbF9kb2N1bWVudDoKICAgIGRmX3ByaW50OiBwYWdlZAogICAgdG9jOiB5ZXMKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogaW5saW5lCi0tLQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRSwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAojIEZ1dHVyZSB2YWx1ZSAKRm9ybXVsYQokJApGViA9IFAoMStcZnJhY3tyfXttfSlee25tfQokJAoKRXhhbXBsZQpBIGNvbXBhbnkgc2hvdWxkIHBheSAkMjAgbWlsbGlvbiBhZnRlciA0IHllYXJzLiBJdCBjYW4gaW52ZXN0IG1vbmV5IGF0IGFubnVhbCByYXRlIG9mIDclIHNlbWlhbm51YWxseS4gSG93IG11Y2ggc2hvdWQgdGhlIGNvbXBhbnkgaW52ZXN0IHRvZGF5PwokJAoyMCwwMDAsMDAwID0gUCgxK1xmcmFjezdcJX17Mn0pXnsyXGNkb3Q0fQokJApBbnN3ZXIgCmBgYHtyfQoyMDAwMDAwMC8oKDErKDAuMDcvMikpXigxLzgpKQpgYGAKCiMgQ29udGludW91cyBjb21wb3VuZGluZwpTaW5jZSAkJFxsaW1fe3hccmlnaHRhcnJvdyBcaW5mdHkgfSAoMStcZnJhY3thfXtufSlebiA9IGVeYSQkCndlIGhhdmUgJCRcbGltX3t4XHJpZ2h0YXJyb3cgXGluZnR5IH0gKDErXGZyYWN7cn17bX0pXm4gPSBlXnIkJApUaHVzIGluIGNvbnRpbnVvdXMgY29tcG91bmRpbmcsIHRoZSBmdXR1cmUgdmFsdWUgc2hvdWxkIGJlIAokJCBGViA9IFBlXntybn0kJAojIENvbnZlcnNpb24gYmV0d2VlbiBjb21wdW5kaW5nIG1ldGhvZCAKJHJfMSQ6IEFubnVhbCByYXRlIHdpdGggY29udGludW91cyBjb21wdW5kaW5nIG1ldGhvZAokcl8yJDogRXF1aXZlbGFudCByYXRlIGNvbXBvdW5kZWQgJG0kIHRpbWVzIHBlciBhbm51bQpTaW5jZSAKJCQKRlYgPSBQKDErXGZyYWN7cl8yfXttfSlee21ufT1QZV57cl8xIFxjZG90IG59CiQkCldlIGhhdmUgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CnJfMSAmPW1cbG4oMStcZnJhY3tyXzJ9e219KSBcXApyXzIgJj0gbShlXntcZnJhY3tyXzF9e219fS0xKQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCkV4YW1wbGUgCkNvbnNpZGVyIGludGVyZXN0IHJhdGUgb2YgMTAlIHdpdGggcXVhcnRlcmx5IGNvbXBvdW5kaW5nLiBXaGF0J3MgdGhlIGVxdWl2ZWxlbnQgcmF0ZSB3aXRoIGNvbnRpbnVub3VzIHJhdGU/CmBgYHtyfQo0KmxvZygxKygwLjEvNCkpCmBgYAojIEFubnVpdHkgCiogT3JkaW5hcnkgYW5udWl0eTogKipwYXlzIG91dCoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKiplbmQgb2YgbW9udGgqKi4KKiBBbm51aXR5IGR1ZTogKipyZWNlaXZlcyoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKipiZWdpbmluZyBvZiB0aGUgbW9udGgqKi4KCiMjIE9yZGluYXJ5IGFubnVpdHkgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CkZWICY9IEMgK0MoMStyKSsuLi4rQygxK3IpXntuLTF9IFxcCiY9IFxzdW1fe2k9MH1ee24tMX1DKDErcilee2l9IFxcCiY9IEMgXGZyYWN7KDErcilebi0xfXtyfQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCgoKQWxsb3dpbmcgY29tcG91bmRlZCAkbSQgdGltZXM6CgokJApGViA9QyBcZnJhY3soMStcZnJhY3tyfXttfSlee25tfS0xfXtcZnJhY3tyfXttfX0KJCQKCgojIyBBbm51aXR5IGR1ZSAKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KRlYgJj0gQygxK3IpKy4uLitDKDErcilebiBcXAomPSBcc3VtX3tpPTF9XntufUMoMStyKV57aX0gXFwKJj1DKDErcilcZnJhY3soMStyKV5uLTF9e3J9ClxlbmR7YWxpZ25lZH0KXGVuZHtlcXVhdGlvbn0KJCQKCkFsbG93aW5nIGNvbXBvdW5kZWQgJG0kIHRpbWVzOgoKJCQKRlYgPUMgKDErXGZyYWN7cn17bX0pXGZyYWN7KDErXGZyYWN7cn17bX0pXntubX0tMX17XGZyYWN7cn17bX19CiQkCiMjIFByZXNlbnQgdmFsdWUgb2YgdGhlIGdlbmVyYWwgYW5udWl0eQokJApQPVxzdW1fe2k9MX1ee21ufUMoMStyKV57LWl9ICA9IEMgXGZyYWN7MS0oMStcZnJhY3tyfXttfV57LW5tfSl9e1xmcmFje3J9e219fQokJApFeGFtcGxlClRoZSAkUCQgb2YgYW4gYW5udWl0eSBvZiAkMTAwIHBlciBhbm51bSBmb3IgNSB5ZWF0cyBhdCBhbm51YWwgcmF0ZSBvZiA2LjI1JSBpcyAKCmBgYHtyfQojIGRlZmluZSBhbm51aXR5IGZ1bmN0aW9uCmNhbF9hbm51aXR5IDwtIGZ1bmN0aW9uKGMsIHIsIHApIHsKICBhIDwtIDAKICBmb3IgKGkgaW4gMTpwKSB7CiAgICB0ZW1wIDwtICgxICsgcileKC1pKQogICAgYSA8LSBhICsgdGVtcAogIH0KICByZXR1cm4oYyAqIGEpCn0KYGBgCmBgYHtyfQojIGNhbGN1bGF0ZSBhbm51aXR5CmNhbF9hbm51aXR5KDEwMCwwLjA2MjUsNSkKYGBgCiMgTW9ydGdhZ2UKRXhhbXBsZSAKQ29uc2lkZXIgYSAxNS15ZWFyLCAkMjUwLDAwMCBsb2FuIGF0IDglIGludGVyZXN0IHJhdGUsIHdoYXQncyB0aGUgbW9udGhseSBwYXltZW50PwooSGludDogdXNlIGdlbmVyYWwgYW5udWl0eSBmb3JtdWxhKQpgYGB7cn0KMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSkKYGBgCgojIFlpZWxkcwpUaGUgcmV0dXJuIG9mIHRoZSBpbnZlc3RtZW50LgoqIEJvbmQgRXF1aXZhbGVudCBZaWVsZCwgQkVZCiogTW9ydGdhZ2UgRXF1aXZhbGVudCBZaWVsZCwgTUVZCgojIFplcm8tQ291cG9uIEJvbmRzIApUaGUgJHByaWNlJCBvZiBhIHplcm8gY291cG9uIGJvbmRzIHRoYXQgcGF5cyAkRiQgZG9sbGFycyBpbiAkbiQgcGVyaW9kcyBmb2xsb3dzOgokJApQcmljZSA9IFxmcmFje0Z9eygxK3IpXm59CiQkCkV4YW1wbGU6IApUaGUgaW50ZXJlc3QgcmF0ZSBpcyBjb21wb3VuZGVkIHNlbWlhbm51YWxseS4gQSB6ZXJvIGNvdXBvbiBib25kIHRoYXQgcGF5cyB0aGUgcGFyIHZhbHVlIDIwIHllYXJzIGZyb20gbm93IHdpbGwgYmUgcHJpY2VkIGF0IGhvdyBtdWNoIG9mIGl0cyBwYXIgdmFsdWU/CiRyPThcJSxtPTIsbj0yMCQgCiQkClxmcmFje1ByaWNlfXtGfSA9IFxmcmFjezF9eygxK1xmcmFje3J9e219KV57bm19fT0gXGZyYWN7MX17KDErXGZyYWN7OFwlfXsyfSleezIwXGNkb3QyfX0KJCQKYGBge3J9CjEvKCgxKygwLjA4LzIpKV4oMjAqMikpCmBgYApJZiB0aGUgYm9uZCBtYXR1cmVzIGluIDEwIHllYXJzIGluc3RlYWQgb2YgMjAgeWVhcnMsIHRoZSBwcmljZSB3aWxsIGJlIApgYGB7cn0KMS8oKDErKDAuMDgvMikpXigxMCoyKSkKYGBgCiMgTGV2ZWwgY291cG9uIGJvbmQKCiogSW52ZXN0ZXIgd2lsbCByZWNlaXZlZCBjb3Vwb24gZWFjaCBwZXJpb2QuCiogRGVub3RlIHBhciB2YWx1ZSAkRiQsIGFubnVhbCBjb3VucG9uIHJhdGUgJGMkIGFuZCB0aGUgY291cG9uIHJlY2VpdmVkIGluIGVhY2ggcGVyaW9kICRDJC4KKiBUaGUgdG90YWwgbnVtYmVyIG9mIHBlcmlvZHMgaXMgJG4kLgoqIEFzc3VtZSB0aGUgaW50ZXJlc3QgY29tcG91bmQgJG0kIHRpbWVzIGFubnVhbHksIHRoZSBnZW5lcmFsIHByaWNlIGZvcm11bGEgb2YgdGhlIGxldmVsIGNvdXBvbiBib25kIGlzOgoKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KUCAmPVxmcmFje0N9eygxK1xmcmFje3J9e219KX0rLi4uK1xmcmFje0MrRn17KDErXGZyYWN7cn17bX0pXm59IFxcCiY9IFxmcmFje0Z9eygxK1xmcmFje3J9e219KV5ufStcc3VtX3tpPTF9XntufUMoMStcZnJhY3tyfXttfSleey1pfSBcXAomPSBcZnJhY3tGfXsoMStcZnJhY3tyfXttfSlebn0gK0NcZnJhY3sxLSgxK1xmcmFje3J9e219KV57LW59fXtyfQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCndoZXJlIHRoZSBjb3Vwb24gcmVjZWl2ZWQgYXQgZWFjaCBwZXJpb2QgJEMkIGlzIGdpdmVuIGJ5ICRcZnJhY3tGIFx0aW1lcyBjfXttfSAkLgoKRXhhbXBsZSAKMTUlIEJFWSwgMTAgeWVhcnMgYm9uZCB3aXRoIGNvbXBvdW5kIHJhdGUgb2YgMTAlIHBhaWQgc2VtaWFubnVhbGx5IHNob3VsZCBzZWxsIGZvciAKKEhpbnQ6IGFzc3VtZSB0aGUgcGFyIHZhbHVlIGlzIDEwMCkKCiogV2l0aG91dCBsb3NzIG9mIGdlbmVyYWxpdHksIGxldCBwYXIgdmFsdWUgJEY9MTAwJC4KKiBJbnRlcmVzdCByYXRlICQxNVwlJCwgJG09MiQKKiBUb3RhbCBudW1iZXIgb2YgcGVyaW9kcyAkbj0yIFx0aW1lcyAxMCA9IDIwJAoqIENvdXBvbiByZWNlaXZlZCBhdCBlYWNoIHBlcmlvZCAkQyA9IFxmcmFjezEwMCBcdGltZXMgMC4xfXsyfSQuCgpgYGB7ciBlY2hvPVRSVUV9CigxMDAqMC4xLzIpKigoMS0oMSsoMC4xNS8yKSleKC0xMCoyKSkvKDAuMTUvMikpKygxMDAvKDErKDAuMTUvMikpXigxMCoyKSkKYGBgCgpFeGFtcGxlIAoxNSB5ZWFycywgOSUgY291cG9uIHJhdGUgCmBgYHtyfQojIGRlZmluZSB5aWVsZC1wcmljZSBmdW5jdGlvbiAKY2FsX3ByaWNlIDwtIGZ1bmN0aW9uKG4sIGMsIG0pIHsKICBwIDwtIGMoKQogIHMgPC0gc2VxKDAuMDc1LCAwLjEwNSwgMC4wMDUpCiAgZm9yIChpIGluIDE6bGVuZ3RoKHMpKSB7CiAgICBwW2ldIDwtIDEwMCAvICgoMSArIHNbaV0gLyBtKV4obiAqIG0pKSArICgxMDAgKiBjIC8gbSkgKiAoKDEgLSAoMSArIChzW2ldIC8gbSkpXigtbiAqIG0pKSAvIChzW2ldIC8gbSkpCiAgfQogIHJldHVybihwKQp9CmBgYApgYGB7cn0KIyBjYWxjdWxhdGUgdGhlIHByaWNlcyB1bmRlciBkaWZmZXJlbnQgeWllbGQgCmNhbF9wcmljZSgxNSwgMC4wOSwgMikKYGBgCgojIEJvbmQgcHJpY2Ugd2hlbiBzZWxsCiMjIEFjY3J1ZWQgaW50ZXJlc3QgCiogTGV0ICRcb21lZ2EkIGJlIHRoZSByZW1haW5pbmcgcG9ydGlvbnMgb2YgY291cG9uIHdoZW4gc2VsbC4KVGhlIGFjY3J1ZWQgaW50ZXJlc3QgKOaHieioiOWIqeaBrykgd2lsbCBiZSAKCiQkCkFJID0gQyBcdGltZXMgKDEtXG9tZWdhKQokJAojIyMgTWV0aG9kIHRvIGNhbGN1bGF0ZSB0aGUgZGF5cyAoVEJEKQojIyBQcmVzZW50IHZhbHVlIHdoZW4gc2VsbAoqIEluIFVLIGFuZCBVUywgdGhlIHF1b3RlZCBwcmljZSBkb2VzIG5vdCBpbmNsdWUgdGhlIGFjY3J1ZWQgaW50ZXJlc3QsIHRoaXMgaXMgY2FsbCBjbGVhbiBwcmljZSAvIGZsYXQgcHJpY2UuIAoKVGhlIHByZXNlbnQgdmFsdWUgb2YgdGhlIGJvbmRzIHdoZW4gc2VsbDoKCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9ClBWICY9Y2xlYW4gXCBwcmljZSArIEFJID0gXGZyYWN7Q317KDErXGZyYWN7cn17bX0pXntcb21lZ2F9fSsuLi4rXGZyYWN7QytGfXsoMStcZnJhY3tyfXttfSlee1xvbWVnYStuLTF9fSBcXAomPSBcZnJhY3tGfXsoMStcZnJhY3tyfXttfSlee1xvbWVnYStuLTF9fStcc3VtX3tpPTB9XntuLTF9IFxmcmFje0N9eygxK1xmcmFje3J9e219KV57XG9tZWdhK2l9fSBcXApcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCkV4YW1wbGUoVEJEKToKCiMgQm9uZCBwcmljZSB2b2xhdGlsaXR5CiMjIER1cmF0aW9uIAojIyMgTWFjYXVsYXkgZHVyYXRpb24gKE1EKQoKKGluc2VydCBmb3JtdWxhKQoKIyMjIE1vZGlmaWVkIGR1cmF0aW9uIAoKKGluc2VydCBmb3JtdWxhKQoKRXhhbXBsZTogTW9kaWZpZWQgZHVyYXRpb24gMTEuNTQsIGNoYW5nZSBpbiB5aWVsZCAwLjElLCB0aGUgcHJpY2Ugc2hvdWxkICoqZGVjcmVhc2UgMS4xNTQlKioKCiMjIyBFZmZlY3RpdmUgZHVyYXRpb24gCgooaW5zZXJ0IGZvcm11bGEpCgojIyBDb252ZXhpdHkgCgooaW5zZXJ0IGZvcm11bGEpCgojIyBJbW11dGl6YXRpb24KCiMgU3BvdCByYXRlIApDb21wYXJlIHRoZSBkaWZmZXJlbnQgYm9uZHMgdG8gdGhlIHByZXNlbnQgYmFzZS4KQ2hhbmdlIHRoZSBjb3VtcG91bmQgcmF0ZSBpbiBjb3Vwb24gYm9uZHMgdG8gc2lnbGUgcmF0ZS4gClVzZWZ1bCB3aGVuIHlvdSBoYXZlIGludmVzdG1lbnQgcHJvZm9saW8uCgooaW5zZXJ0IGZvcm11bGEpCgojIEZvcndhcmQgcmF0ZSAKCihpbnNlcnQgZm9ybXVsYSkKKGluc2VydCBleGFtcGxlKQoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW4gY2xhc3MgcHJhY3RpY2UiCmF1dGhvcjogIkxvd3NvbiBMaSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0aGVtZTogc2ltcGxleAogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogeWVzCiAgaHRtbF9kb2N1bWVudDoKICAgIGRmX3ByaW50OiBwYWdlZAogICAgdG9jOiB5ZXMKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogaW5saW5lCi0tLQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRSwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAojIEZ1dHVyZSB2YWx1ZSAKRm9ybXVsYQokJApGViA9IFAoMStcZnJhY3tyfXttfSlee25tfQokJAoKRXhhbXBsZQpBIGNvbXBhbnkgc2hvdWxkIHBheSAkMjAgbWlsbGlvbiBhZnRlciA0IHllYXJzLiBJdCBjYW4gaW52ZXN0IG1vbmV5IGF0IGFubnVhbCByYXRlIG9mIDclIHNlbWlhbm51YWxseS4gSG93IG11Y2ggc2hvdWQgdGhlIGNvbXBhbnkgaW52ZXN0IHRvZGF5PwokJAoyMCwwMDAsMDAwID0gUCgxK1xmcmFjezdcJX17Mn0pXnsyXGNkb3Q0fQokJApBbnN3ZXIgCmBgYHtyfQoyMDAwMDAwMC8oKDErKDAuMDcvMikpXigxLzgpKQpgYGAKCiMgQ29udGludW91cyBjb21wb3VuZGluZwpTaW5jZSAkJFxsaW1fe3hccmlnaHRhcnJvdyBcaW5mdHkgfSAoMStcZnJhY3thfXtufSlebiA9IGVeYSQkCndlIGhhdmUgJCRcbGltX3t4XHJpZ2h0YXJyb3cgXGluZnR5IH0gKDErXGZyYWN7cn17bX0pXm4gPSBlXnIkJApUaHVzIGluIGNvbnRpbnVvdXMgY29tcG91bmRpbmcsIHRoZSBmdXR1cmUgdmFsdWUgc2hvdWxkIGJlIAokJCBGViA9IFBlXntybn0kJAojIENvbnZlcnNpb24gYmV0d2VlbiBjb21wdW5kaW5nIG1ldGhvZCAKJHJfMSQ6IEFubnVhbCByYXRlIHdpdGggY29udGludW91cyBjb21wdW5kaW5nIG1ldGhvZAokcl8yJDogRXF1aXZlbGFudCByYXRlIGNvbXBvdW5kZWQgJG0kIHRpbWVzIHBlciBhbm51bQpTaW5jZSAKJCQKRlYgPSBQKDErXGZyYWN7cl8yfXttfSlee21ufT1QZV57cl8xIFxjZG90IG59CiQkCldlIGhhdmUgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CnJfMSAmPW1cbG4oMStcZnJhY3tyXzJ9e219KSBcXApyXzIgJj0gbShlXntcZnJhY3tyXzF9e219fS0xKQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCkV4YW1wbGUgCkNvbnNpZGVyIGludGVyZXN0IHJhdGUgb2YgMTAlIHdpdGggcXVhcnRlcmx5IGNvbXBvdW5kaW5nLiBXaGF0J3MgdGhlIGVxdWl2ZWxlbnQgcmF0ZSB3aXRoIGNvbnRpbnVub3VzIHJhdGU/CmBgYHtyfQo0KmxvZygxKygwLjEvNCkpCmBgYAojIEFubnVpdHkgCiogT3JkaW5hcnkgYW5udWl0eTogKipwYXlzIG91dCoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKiplbmQgb2YgbW9udGgqKi4KKiBBbm51aXR5IGR1ZTogKipyZWNlaXZlcyoqIHRoZSBzYW1lIGFtb3VudCBvZiBtb25leSBhdCB0aGUgKipiZWdpbmluZyBvZiB0aGUgbW9udGgqKi4KCiMjIE9yZGluYXJ5IGFubnVpdHkgCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CkZWICY9IEMgK0MoMStyKSsuLi4rQygxK3IpXntuLTF9IFxcCiY9IFxzdW1fe2k9MH1ee24tMX1DKDErcilee2l9IFxcCiY9IEMgXGZyYWN7KDErcilebi0xfXtyfQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCgoKQWxsb3dpbmcgY29tcG91bmRlZCAkbSQgdGltZXM6CgokJApGViA9QyBcZnJhY3soMStcZnJhY3tyfXttfSlee25tfS0xfXtcZnJhY3tyfXttfX0KJCQKCgojIyBBbm51aXR5IGR1ZSAKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KRlYgJj0gQygxK3IpKy4uLitDKDErcilebiBcXAomPSBcc3VtX3tpPTF9XntufUMoMStyKV57aX0gXFwKJj1DKDErcilcZnJhY3soMStyKV5uLTF9e3J9ClxlbmR7YWxpZ25lZH0KXGVuZHtlcXVhdGlvbn0KJCQKCkFsbG93aW5nIGNvbXBvdW5kZWQgJG0kIHRpbWVzOgoKJCQKRlYgPUMgKDErXGZyYWN7cn17bX0pXGZyYWN7KDErXGZyYWN7cn17bX0pXntubX0tMX17XGZyYWN7cn17bX19CiQkCiMjIFByZXNlbnQgdmFsdWUgb2YgdGhlIGdlbmVyYWwgYW5udWl0eQokJApQPVxzdW1fe2k9MX1ee21ufUMoMStyKV57LWl9ICA9IEMgXGZyYWN7MS0oMStcZnJhY3tyfXttfV57LW5tfSl9e1xmcmFje3J9e219fQokJApFeGFtcGxlClRoZSAkUCQgb2YgYW4gYW5udWl0eSBvZiAkMTAwIHBlciBhbm51bSBmb3IgNSB5ZWF0cyBhdCBhbm51YWwgcmF0ZSBvZiA2LjI1JSBpcyAKCmBgYHtyfQojIGRlZmluZSBhbm51aXR5IGZ1bmN0aW9uCmNhbF9hbm51aXR5IDwtIGZ1bmN0aW9uKGMsIHIsIHApIHsKICBhIDwtIDAKICBmb3IgKGkgaW4gMTpwKSB7CiAgICB0ZW1wIDwtICgxICsgcileKC1pKQogICAgYSA8LSBhICsgdGVtcAogIH0KICByZXR1cm4oYyAqIGEpCn0KYGBgCmBgYHtyfQojIGNhbGN1bGF0ZSBhbm51aXR5CmNhbF9hbm51aXR5KDEwMCwwLjA2MjUsNSkKYGBgCiMgTW9ydGdhZ2UKRXhhbXBsZSAKQ29uc2lkZXIgYSAxNS15ZWFyLCAkMjUwLDAwMCBsb2FuIGF0IDglIGludGVyZXN0IHJhdGUsIHdoYXQncyB0aGUgbW9udGhseSBwYXltZW50PwooSGludDogdXNlIGdlbmVyYWwgYW5udWl0eSBmb3JtdWxhKQpgYGB7cn0KMjUwMDAwLygoMS0oKDErKDAuMDgvMTIpKV4oLTEyKjE1KSkpLygwLjA4LzEyKSkKYGBgCgojIFlpZWxkcwpUaGUgcmV0dXJuIG9mIHRoZSBpbnZlc3RtZW50LgoqIEJvbmQgRXF1aXZhbGVudCBZaWVsZCwgQkVZCiogTW9ydGdhZ2UgRXF1aXZhbGVudCBZaWVsZCwgTUVZCgojIFplcm8tQ291cG9uIEJvbmRzIApUaGUgJHByaWNlJCBvZiBhIHplcm8gY291cG9uIGJvbmRzIHRoYXQgcGF5cyAkRiQgZG9sbGFycyBpbiAkbiQgcGVyaW9kcyBmb2xsb3dzOgokJApQcmljZSA9IFxmcmFje0Z9eygxK3IpXm59CiQkCkV4YW1wbGU6IApUaGUgaW50ZXJlc3QgcmF0ZSBpcyBjb21wb3VuZGVkIHNlbWlhbm51YWxseS4gQSB6ZXJvIGNvdXBvbiBib25kIHRoYXQgcGF5cyB0aGUgcGFyIHZhbHVlIDIwIHllYXJzIGZyb20gbm93IHdpbGwgYmUgcHJpY2VkIGF0IGhvdyBtdWNoIG9mIGl0cyBwYXIgdmFsdWU/CiRyPThcJSxtPTIsbj0yMCQgCiQkClxmcmFje1ByaWNlfXtGfSA9IFxmcmFjezF9eygxK1xmcmFje3J9e219KV57bm19fT0gXGZyYWN7MX17KDErXGZyYWN7OFwlfXsyfSleezIwXGNkb3QyfX0KJCQKYGBge3J9CjEvKCgxKygwLjA4LzIpKV4oMjAqMikpCmBgYApJZiB0aGUgYm9uZCBtYXR1cmVzIGluIDEwIHllYXJzIGluc3RlYWQgb2YgMjAgeWVhcnMsIHRoZSBwcmljZSB3aWxsIGJlIApgYGB7cn0KMS8oKDErKDAuMDgvMikpXigxMCoyKSkKYGBgCiMgTGV2ZWwgY291cG9uIGJvbmQKCiogSW52ZXN0ZXIgd2lsbCByZWNlaXZlZCBjb3Vwb24gZWFjaCBwZXJpb2QuCiogRGVub3RlIHBhciB2YWx1ZSAkRiQsIGFubnVhbCBjb3VucG9uIHJhdGUgJGMkIGFuZCB0aGUgY291cG9uIHJlY2VpdmVkIGluIGVhY2ggcGVyaW9kICRDJC4KKiBUaGUgdG90YWwgbnVtYmVyIG9mIHBlcmlvZHMgaXMgJG4kLgoqIEFzc3VtZSB0aGUgaW50ZXJlc3QgY29tcG91bmQgJG0kIHRpbWVzIGFubnVhbHksIHRoZSBnZW5lcmFsIHByaWNlIGZvcm11bGEgb2YgdGhlIGxldmVsIGNvdXBvbiBib25kIGlzOgoKJCQKXGJlZ2lue2VxdWF0aW9ufQpcYmVnaW57YWxpZ25lZH0KUCAmPVxmcmFje0N9eygxK1xmcmFje3J9e219KX0rLi4uK1xmcmFje0MrRn17KDErXGZyYWN7cn17bX0pXm59IFxcCiY9IFxmcmFje0Z9eygxK1xmcmFje3J9e219KV5ufStcc3VtX3tpPTF9XntufUMoMStcZnJhY3tyfXttfSleey1pfSBcXAomPSBcZnJhY3tGfXsoMStcZnJhY3tyfXttfSlebn0gK0NcZnJhY3sxLSgxK1xmcmFje3J9e219KV57LW59fXtyfQpcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCndoZXJlIHRoZSBjb3Vwb24gcmVjZWl2ZWQgYXQgZWFjaCBwZXJpb2QgJEMkIGlzIGdpdmVuIGJ5ICRcZnJhY3tGIFx0aW1lcyBjfXttfSAkLgoKRXhhbXBsZSAKMTUlIEJFWSwgMTAgeWVhcnMgYm9uZCB3aXRoIGNvbXBvdW5kIHJhdGUgb2YgMTAlIHBhaWQgc2VtaWFubnVhbGx5IHNob3VsZCBzZWxsIGZvciAKKEhpbnQ6IGFzc3VtZSB0aGUgcGFyIHZhbHVlIGlzIDEwMCkKCiogV2l0aG91dCBsb3NzIG9mIGdlbmVyYWxpdHksIGxldCBwYXIgdmFsdWUgJEY9MTAwJC4KKiBJbnRlcmVzdCByYXRlICQxNVwlJCwgJG09MiQKKiBUb3RhbCBudW1iZXIgb2YgcGVyaW9kcyAkbj0yIFx0aW1lcyAxMCA9IDIwJAoqIENvdXBvbiByZWNlaXZlZCBhdCBlYWNoIHBlcmlvZCAkQyA9IFxmcmFjezEwMCBcdGltZXMgMC4xfXsyfSQuCgpgYGB7ciBlY2hvPVRSVUV9CigxMDAqMC4xLzIpKigoMS0oMSsoMC4xNS8yKSleKC0xMCoyKSkvKDAuMTUvMikpKygxMDAvKDErKDAuMTUvMikpXigxMCoyKSkKYGBgCgpFeGFtcGxlIAoxNSB5ZWFycywgOSUgY291cG9uIHJhdGUgCmBgYHtyfQojIGRlZmluZSB5aWVsZC1wcmljZSBmdW5jdGlvbiAKY2FsX3ByaWNlIDwtIGZ1bmN0aW9uKG4sIGMsIG0pIHsKICBwIDwtIGMoKQogIHMgPC0gc2VxKDAuMDc1LCAwLjEwNSwgMC4wMDUpCiAgZm9yIChpIGluIDE6bGVuZ3RoKHMpKSB7CiAgICBwW2ldIDwtIDEwMCAvICgoMSArIHNbaV0gLyBtKV4obiAqIG0pKSArICgxMDAgKiBjIC8gbSkgKiAoKDEgLSAoMSArIChzW2ldIC8gbSkpXigtbiAqIG0pKSAvIChzW2ldIC8gbSkpCiAgfQogIHJldHVybihwKQp9CmBgYApgYGB7cn0KIyBjYWxjdWxhdGUgdGhlIHByaWNlcyB1bmRlciBkaWZmZXJlbnQgeWllbGQgCmNhbF9wcmljZSgxNSwgMC4wOSwgMikKYGBgCgojIEJvbmQgcHJpY2Ugd2hlbiBzZWxsCiMjIEFjY3J1ZWQgaW50ZXJlc3QgCiogTGV0ICRcb21lZ2EkIGJlIHRoZSByZW1haW5pbmcgcG9ydGlvbnMgb2YgY291cG9uIHdoZW4gc2VsbC4KVGhlIGFjY3J1ZWQgaW50ZXJlc3QgKOaHieioiOWIqeaBrykgd2lsbCBiZSAKCiQkCkFJID0gQyBcdGltZXMgKDEtXG9tZWdhKQokJAojIyMgTWV0aG9kIHRvIGNhbGN1bGF0ZSB0aGUgZGF5cyAoVEJEKQojIyBQcmVzZW50IHZhbHVlIHdoZW4gc2VsbAoqIEluIFVLIGFuZCBVUywgdGhlIHF1b3RlZCBwcmljZSBkb2VzIG5vdCBpbmNsdWUgdGhlIGFjY3J1ZWQgaW50ZXJlc3QsIHRoaXMgaXMgY2FsbCBjbGVhbiBwcmljZSAvIGZsYXQgcHJpY2UuIAoKVGhlIHByZXNlbnQgdmFsdWUgb2YgdGhlIGJvbmRzIHdoZW4gc2VsbDoKCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9ClBWICY9Y2xlYW4gXCBwcmljZSArIEFJID0gXGZyYWN7Q317KDErXGZyYWN7cn17bX0pXntcb21lZ2F9fSsuLi4rXGZyYWN7QytGfXsoMStcZnJhY3tyfXttfSlee1xvbWVnYStuLTF9fSBcXAomPSBcZnJhY3tGfXsoMStcZnJhY3tyfXttfSlee1xvbWVnYStuLTF9fStcc3VtX3tpPTB9XntuLTF9IFxmcmFje0N9eygxK1xmcmFje3J9e219KV57XG9tZWdhK2l9fSBcXApcZW5ke2FsaWduZWR9ClxlbmR7ZXF1YXRpb259CiQkCkV4YW1wbGUoVEJEKToKCiMgQm9uZCBwcmljZSB2b2xhdGlsaXR5CiMjIER1cmF0aW9uIAojIyMgTWFjYXVsYXkgZHVyYXRpb24gKE1EKQoKKGluc2VydCBmb3JtdWxhKQoKIyMjIE1vZGlmaWVkIGR1cmF0aW9uIAoKKGluc2VydCBmb3JtdWxhKQoKRXhhbXBsZTogTW9kaWZpZWQgZHVyYXRpb24gMTEuNTQsIGNoYW5nZSBpbiB5aWVsZCAwLjElLCB0aGUgcHJpY2Ugc2hvdWxkICoqZGVjcmVhc2UgMS4xNTQlKioKCiMjIyBFZmZlY3RpdmUgZHVyYXRpb24gCgooaW5zZXJ0IGZvcm11bGEpCgojIyBDb252ZXhpdHkgCgooaW5zZXJ0IGZvcm11bGEpCgojIyBJbW11dGl6YXRpb24KCiMgU3BvdCByYXRlIApDb21wYXJlIHRoZSBkaWZmZXJlbnQgYm9uZHMgdG8gdGhlIHByZXNlbnQgYmFzZS4KQ2hhbmdlIHRoZSBjb3VtcG91bmQgcmF0ZSBpbiBjb3Vwb24gYm9uZHMgdG8gc2lnbGUgcmF0ZS4gClVzZWZ1bCB3aGVuIHlvdSBoYXZlIGludmVzdG1lbnQgcHJvZm9saW8uCgooaW5zZXJ0IGZvcm11bGEpCgojIEZvcndhcmQgcmF0ZSAKCihpbnNlcnQgZm9ybXVsYSkKKGluc2VydCBleGFtcGxlKQoKIyBPcHRpb25zIAojIyBEZWZpbml0aW9uIAoKIyMgVHlwZXMgb2Ygb3B0aW9ucwoKIyMgUGF5b2ZmIAojIyMgQ29udmluaWVudCBjb252ZXRpb25zCgoqIEM6IGNhbGwgdmFsdWUgKOiyt+asiuasiuWIqemHkSkKKiBQOnB1dCB2YWx1ZSAo6LOj5qyK5qyK5Yip6YeRKQoqIFgvSzogc3RyaWtlIHByaWNlICjlsaXntITlg7kpCiogUzogc3RvY2sgcHJpY2UgKOaomeeahOeJqeePvuiyqOWDueagvCkKKiBEOiBkaXZpZGVuZHMgKOaYr+WQpuacieeZvOiCoeWIqSkKCiMjIyBNYXRoZW1hdGljIHJlcHJlc2VudGF0aW9uIAoqIFRoZSBwYXlvZmYgb2YgYSBjYWxsIGF0IGV4cHJpYXRpb24gaXMgCgokJApDID0gXG1heCAoMCxTLVgpCiQkCgpXaGVuIHRoZSAqKnN0b2NrIHByaWNlIGlzIGxvd2VyIHRoYW4gdGhlIHN0cmlrZSBwaXJjZSoqIChTPFgpLCB0aGUgaW52ZXN0b3Igd2lsbCBnaXZlIHVwIGNhbGwgb3B0aW9uLgoKKiBUaGUgcGF5b2ZmIG9mIGEgcHUgYXQgZXhwcmlhdGlvbiBpcyAKCiQkClAgPSBcbWF4ICgwLFgtUykKJCQKCldoZW4gdGhlICoqc3RvY2sgcHJpY2UgaXMgaGlnaGVyIHRoYW4gdGhlIHN0cmlrZSBwaXJjZSoqIChTPlgpLCB0aGUgaW52ZXN0b3Igd2lsbCBnaXZlIHVwIHB1dCBvcHRpb24uCgojIyBTdHJhdGVneSAKCihpbnNlcnQgaW1hZ2UpCgojIyBUZXJtaW5vbG9neQoKfE9wdGlvbnxTdHJpa2UgUHJpY2V8U3RvY2sgUHJpY2V8IFRlcm1pbm9sb2d5fAp8Oi0tLS06fDotLS0tOnw6LS0tLTp8Oi0tLS06fAp8Q2FsbHw0NXw0MHwqKk91dCoqLW9mLXRoZS1tb25leSjmlL7mo4QpfAp8Q2FsbHw0MHw0MHxBdC1vZi10aGUtbW9uZXl8CnxDYWxsfDM1fDQwfCoqSW4qKi1vZi10aGUtbW9uZXko6LO66YyiKXwKfFB1dHw4MHwxMDB8KipPdXQqKi1vZi10aGUtbW9uZXko5pS+5qOEKXwKfFB1dHwxMDB8MTAwfEF0LW9mLXRoZS1tb25leXwKfFB1dHwxMzB8MTAwfCoqSW4qKi1vZi10aGUtbW9uZXko6LO66YyiKXwKCiMjIFN0cmFkZGxlIHZzLiBzdHJhbmdsZQooc3RyYXRlZ3kpCgojIyBPcHRpb24gcHJpY2luZyBtb2RlbCAKCiMjIEJsYWNrLVNjaG9sZXMgTW9kZWwKQWxzbyBjYWxsZWQgQmxhY2stU2Nob2xlcy1NZXJ0b24gTW9kZWwKCiMjIyBCYXNpYyBhc3N1bXB0aW9ucwoKfEFzc3VtcHRpb25zfFZpb2xhdGlvbnwKfDotLS0tOnw6LS0tLTp8Cnzos4fmnKzluILloLTlroznvo7jgIHmspLmnInnqIXmiJbkuqTmmJPmiJDmnKzjgIHogqHnpajlg7nmoLzmspLmnInkuIrkuIvpmZDjgIHku7vkvZXkupTnpajlj6/ku6XnhKHpmZDliIblibLjgIHlj6/nhKHpmZDos6Pnqbp85pmv5rCj5LiN5aW955qE5pmC5YCZ5pS/5bqc5Y+v6IO95pyD56aB5q2i6LOj56m6fAp86IKh5YO55Y+W5bCN5pW45b6M56ym5ZCI5bi45oWL5YiG6YWNfOacieWPr+iDveacg+mbhuS4reWcqOafkOS6m+WNgOmWk3wKfOiLpeS7pOiCoeWDuemBjueoi+eCuuW4uOaFi+WIhumFje+8jOiCoeWDueWPr+iDveWAvOWwh+W+nuiyoOeEoeeqruWkp+WIsOato+eEoeeqruWkp3znnJ/lr6bogqHlg7nmspLmnInosqDlgLx8CnznhKHpoqjpmqrliKnnjofjgIHogqHnpajloLHphaznjofnmoTms6Lli5XluqbngrrluLjmlbh8RkVE5bi45pu05pS554Sh6aKo6Zqq5Yip546H6YCa5bi46Zqo5a2j5bqm6Kq/5pW044CB5rOi5YuV5LiN54K65bi45pW4fAp86YG45pOH5qyK5a2Y57qM5pyf6ZaT77yM6IKh56Wo5LiN55m85pS+5Lu75L2V6IKh5YipfHwKfOatkOW8j+mBuOaTh+asiu+8jOWPquiDveWcqOWIsOacn+aXpeaZguWxpee0hHzpgoTmnInnvo7lvI/pgbjmk4fmrIp8CnzmqJnnmoTogqHnpajkuI3mnIPpgZXntIR85pyJ5Y+v6IO96IKh56Wo5pyD5LiL5biCfAp86IKh5YO55piv6YCj57qM55qE77yM5LiN5pyD5pyJ56qB55m85oCn6IKh5YO56Lez56m655qE5oOF5rOB55m855SffOacgOi/keW4uOi3s+epunwKCiMjIyBGb3JtdWxhIAoKCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CmMgJj0gU197MH1OKGRfezF9KS1LZV57LXJUfU4oZF97Mn0pIFxcCnAgJj0gS2Veey1yVH1OKC1kX3syfSktU197MH1OKC1kX3sxfSkgXFwKCndoZXJlIFwgXCAgZF97MX0gJj0gIFxmcmFje1xsbihTX3swfS9LKSsocitcc2lnbWFeezJ9LzIpVH17XHNpZ21hIFxzcXJ0KFQpfSBcXApkX3syfSAmPSAgXGZyYWN7XGxuKFNfezB9L0spKyhyLVxzaWdtYV57Mn0vMilUfXtcc2lnbWEgXHNxcnQoVCl9ID0gXHNpZ21hIFxzcXJ0KFQpIFxcClxlbmR7YWxpZ25lZH0KXGVuZHtlcXVhdGlvbn0KJCQKCgoqIENvbmNlcHQ6IOePvuWDuSgkU197MH0kKSDmnI3lvp7luLjmhYvliIbkvYjvvIzlsaXntITlg7koJEskKeimgeaKmOePvuWbnuS+hu+8jOacjeW+nuW4uOaFi+WIhuS9iOOAgiRcc2lnbWEk54K65qiZ55qE54mp5rOi5YuV546HKOS8sOioiCnjgIIkciTngrrnhKHpoqjpmqrliKnnjofjgIIKCgojIyMgUHV0IENhbGwgUGFyaXR5IAoKKiDosrfos6PmrIrlubPlg7npl5zkv4IKCiQkClxiZWdpbntlcXVhdGlvbn0KXGJlZ2lue2FsaWduZWR9CkMrWGVeey1yVH0gJj0gUCtTIFxcCndoZXJlIFwgXCAgQyAmPSBjYWxsIFwgcHJlbWl1bSBcXApYZV57LXJUfSAmPSBwcmVzZW50IFwgdmFsdWUgXCBvZiBcIHRoZSBcIHN0cmlrZSBcXApQICY9IHB1dCBcIHByZW1pdW0gXFwgClMgJj0gdGhlIFwgY3VycmVudCBcIHByaWNlIFwgb2YgXCB0aGUgXCB1bmRlcmxpbmUgXFwgClxlbmR7YWxpZ25lZH0KXGVuZHtlcXVhdGlvbn0KJCQKKiBHZW9tZXRyaWMgQnJvbmlhbiBNb3Rpb24gCgokJApcbWF0aHJte2R9U197dH0gOj0gXG11IFNfe3R9XG1hdGhybXtkfWRfe3R9ICtcc2lnbWEgU197dH0gXG1hdGhybXtkfUJfe3R9LCAwXGxlcSB0IFxsZXEgVAokJAp3aGVyZSAkU197dH0kIGlzIHRoZSBzdG9jayBwcmljZSBhdCB0aW1lICR0JCwgICRcbXUkIGlzIHRoZSBkcmlmdCByYXRlKOiCoeWDueW5tOaUtuebiueOh+eahOacn+acm+WAvCksJFxzaWdtYSQgaXMgdGhlIHZvbGF0aWxpdHkgb2YgdGhlIHByaWNlIGluIHllYXJzLCAkQl97dH0kIGlzIHRoZSBCcm93bmlhbiBtb3Rpb24uIE5vdGljZSB0aGF0ICRcbXUsIFxzaWdtYSQgYXJlIGNvbnN0YW50cy4KCiMjIE9wdGlvbiBncmVlayAKCnxHcmVla3xNZWFzdXJlfEFmZmVjdGVkIGJ5fEFmZmVjdHN8Cnw6LS0tLXw6LS0tLXw6LS0tLXw6LS0tLXwKfERlbHRhfEltcGFjdCBvZiB1bmRlcmx5aW5nIHByaWNlIG1vdmUocGVyICQxKXxUaW1lIHVudGlsIGV4cGlyYXRpb24sIHZvbGF0aWxpdHksIGdhbW1hLCBwcmljZXxPcHRpb24gUHJpY2V8CnxHYW1tYXxJbXBhY3Qgb2YgdW5kZXJseWluZyBwcmljZSBtb3ZlKHBlciAkMSl8VGltZSB1bnRpbCBleHBpcmF0aW9uLCB2b2xhdGlsaXR5LCBwcmljZXxEZWx0YXwKfFRoZXRhfEltcGFjdCBvZiBwYXNzYWdlIG9mIHRpbWUocGVyIGRheSl8VGltZSB1bnRpbCBleHBpcmF0aW9uLCBwcmljZSwgdm9sYXRpbGl0eXxPcHRpb24gUHJpY2V8CnxWZWdhfEltcGFjdCBvZiB2b2xhdGlsaXR5IGNoYW5nZShwZXIgMSUpfFRpbWUgdW50aWwgZXhwaXJhdGlvbiwgdm9sYXRpbGl0eXxPcHRpb24gUHJpY2V8CnxSaG98SW1wYWN0IG9mIGludGVyZXN0IHJhdGUgY2hhbmdlIChwZXIgMSUpfEludGVyZXN0IHJhdGUsIHRpbWUgdW50aWwgZXhwaXJhdGlvbnxPcHRpb24gUHJpY2V8Cg==</div>
 
 
 </div>

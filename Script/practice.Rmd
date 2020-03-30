@@ -264,5 +264,120 @@ Useful when you have investment profolio.
 (insert formula)
 (insert example)
 
+# Options 
+## Definition 
+
+## Types of options
+
+## Payoff 
+### Convinient convetions
+
+* C: call value (買權權利金)
+* P:put value (賣權權利金)
+* X/K: strike price (履約價)
+* S: stock price (標的物現貨價格)
+* D: dividends (是否有發股利)
+
+### Mathematic representation 
+* The payoff of a call at expriation is 
+
+$$
+C = \max (0,S-X)
+$$
+
+When the **stock price is lower than the strike pirce** (S<X), the investor will give up call option.
+
+* The payoff of a pu at expriation is 
+
+$$
+P = \max (0,X-S)
+$$
+
+When the **stock price is higher than the strike pirce** (S>X), the investor will give up put option.
+
+## Strategy 
+
+(insert image)
+
+## Terminology
+
+|Option|Strike Price|Stock Price| Terminology|
+|:----:|:----:|:----:|:----:|
+|Call|45|40|**Out**-of-the-money(放棄)|
+|Call|40|40|At-of-the-money|
+|Call|35|40|**In**-of-the-money(賺錢)|
+|Put|80|100|**Out**-of-the-money(放棄)|
+|Put|100|100|At-of-the-money|
+|Put|130|100|**In**-of-the-money(賺錢)|
+
+## Straddle vs. strangle
+(strategy)
+
+## Option pricing model 
+
+## Black-Scholes Model
+Also called Black-Scholes-Merton Model
+
+### Basic assumptions
+
+|Assumptions|Violation|
+|:----:|:----:|
+|資本市場完美、沒有稅或交易成本、股票價格沒有上下限、任何五票可以無限分割、可無限賣空|景氣不好的時候政府可能會禁止賣空|
+|股價取對數後符合常態分配|有可能會集中在某些區間|
+|若令股價過程為常態分配，股價可能值將從負無窮大到正無窮大|真實股價沒有負值|
+|無風險利率、股票報酬率的波動度為常數|FED常更改無風險利率通常隨季度調整、波動不為常數|
+|選擇權存續期間，股票不發放任何股利||
+|歐式選擇權，只能在到期日時履約|還有美式選擇權|
+|標的股票不會違約|有可能股票會下市|
+|股價是連續的，不會有突發性股價跳空的情況發生|最近常跳空|
+
+### Formula 
 
 
+$$
+\begin{equation}
+\begin{aligned}
+c &= S_{0}N(d_{1})-Ke^{-rT}N(d_{2}) \\
+p &= Ke^{-rT}N(-d_{2})-S_{0}N(-d_{1}) \\
+
+where \ \  d_{1} &=  \frac{\ln(S_{0}/K)+(r+\sigma^{2}/2)T}{\sigma \sqrt(T)} \\
+d_{2} &=  \frac{\ln(S_{0}/K)+(r-\sigma^{2}/2)T}{\sigma \sqrt(T)} = \sigma \sqrt(T) \\
+\end{aligned}
+\end{equation}
+$$
+
+
+* Concept: 現價($S_{0}$) 服從常態分佈，履約價($K$)要折現回來，服從常態分佈。$\sigma$為標的物波動率(估計)。$r$為無風險利率。
+
+
+### Put Call Parity 
+
+* 買賣權平價關係
+
+$$
+\begin{equation}
+\begin{aligned}
+C+Xe^{-rT} &= P+S \\
+where \ \  C &= call \ premium \\
+Xe^{-rT} &= present \ value \ of \ the \ strike \\
+P &= put \ premium \\ 
+S &= the \ current \ price \ of \ the \ underline \\ 
+\end{aligned}
+\end{equation}
+$$
+* Geometric Bronian Motion 
+
+$$
+\mathrm{d}S_{t} := \mu S_{t}\mathrm{d}d_{t} +\sigma S_{t} \mathrm{d}B_{t}, 0\leq t \leq T
+$$
+where $S_{t}$ is the stock price at time $t$,  $\mu$ is the drift rate(股價年收益率的期望值),$\sigma$ is the volatility of the price in years, $B_{t}$ is the Brownian motion. Notice that $\mu, \sigma$ are constants.
+
+## Option greek 
+
+|Greek|Measure|Affected by|Affects|
+|:----|:----|:----|:----|
+|Delta|Impact of underlying price move(per $1)|Time until expiration, volatility, gamma, price|Option Price|
+|Gamma|Impact of underlying price move(per $1)|Time until expiration, volatility, price|Delta|
+|Theta|Impact of passage of time(per day)|Time until expiration, price, volatility|Option Price|
+|Vega|Impact of volatility change(per 1%)|Time until expiration, volatility|Option Price|
+|Rho|Impact of interest rate change (per 1%)|Interest rate, time until expiration|Option Price|
