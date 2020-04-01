@@ -381,3 +381,19 @@ where $S_{t}$ is the stock price at time $t$,  $\mu$ is the drift rate(股價年
 |Theta|Impact of passage of time(per day)|Time until expiration, price, volatility|Option Price|
 |Vega|Impact of volatility change(per 1%)|Time until expiration, volatility|Option Price|
 |Rho|Impact of interest rate change (per 1%)|Interest rate, time until expiration|Option Price|
+
+# Random walks 
+
+## Simulation 
+```{r}
+sample(x = c(-1,1),size = 100,replace = TRUE)
+
+for (i in 1:100) {
+
+}
+```
+
+## BOPM
+### Notation 
+R: 報酬率(連續複利)
+r: 無風險利率
