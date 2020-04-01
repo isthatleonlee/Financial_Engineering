@@ -1,5 +1,5 @@
 ---
-title: "HW2"
+title: "HW3"
 author: "Lowson Li, R08323023"
 output:
   html_notebook:
@@ -134,8 +134,6 @@ For put option price:
 ```{r}
 opt_price(S = 160, n = 3, X = 150, u = 1.5, d = 0.5, R = 1.2, type = "put")
 ```
-```
-
 
 # Reference
 [BOPM - RDocumentation](https://www.rdocumentation.org/packages/QFRM/versions/1.0.1/topics/BOPM)
