@@ -1,0 +1,143 @@
+---
+title: "HW2"
+author: "Lowson Li, R08323023"
+output:
+  html_notebook:
+    code_folding: show
+    highlight: tango
+    number_sections: yes
+    theme: simplex
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    toc: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+# Strategy
+1. Try to find the package to simplify the calculation
+2. Try to code by myself
+
+* For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+ + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW3.Rmd)
+ + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+
+# Load packages
+```{r}
+library(dplyr)
+library(knitr)
+library(QFRM)
+library(kableExtra)
+```
+
+# With QFRM package
+**Pricing of Vanilla and Exotic Option Contracts**
+Option pricing (financial derivatives) techniques mainly following textbook 'Options, Futures and Other Derivatives', 9ed by John C.Hull, 2014. Prentice Hall. Implementations are via binomial tree option model (BOPM), Black-Scholes model, Monte Carlo simulations, etc. This package is a result of Quantitative Financial Risk Management course (STAT 449 and STAT 649) at Rice University, Houston, TX, USA, taught by Oleg Melnikov, statistics PhD student, as of Spring 2015.
+
+```{r}
+o <- Opt(Style = "European", Right = "Call", S0 = 160, ttm = 3, K = 150) # An OptPx object
+(o <- BOPM_Eu(OptPx(o, r = 0.18232, NSteps = 3)))$PxBT # option price value
+```
+This function only recombining **symmetric** binomial tree.
+In HW case, we need to construct asymmetric one. 
+
+# With asymmetric binomial tree
+
+For pseudo probability (risk-neutral probability), we have
+
+$$
+p \triangleq \frac{R-d}{u-d}
+$$
+where R denotes to the **gross return**
+
+```{r echo=TRUE}
+# define pseudo probability
+p_prob <- function(R, u, d) {
+  p <- (R - d) / (u - d)
+  return(p)
+}
+```
+
+```{r}
+# calculate pseudo probability
+p_prob(R = 1.2, u = 1.5, d = 0.5)
+```
+
+By the backward induction, we have **call** option price $\mathrm{C}$
+
+$$
+\mathrm{C} = \frac{\sum_{j=0}^{n}\binom{n}{j}p^{n}(1-p)^{n-j}\times \max(0,S_{0}u^{n}d^{n-j}-X)}{R^{n}}
+$$
+where $j = 0,...,n$
+
+```{r}
+# define function
+# Input: S:'stock price', n:'number of periods', X:'strike price', u:'retrun when price goes up, a multiplier', d:'retrun when price goes down, a multiplier', R:'gross return'
+opt_price <- function(S, n, X, u, d, R) {
+  p <- (R - d) / (u - d) # calculate the pseudo probability
+  tree <- c() # create empty vector
+  for (i in 0:n) {
+    tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X) # store payoff in the vector
+  }
+  return(sum(tree) / (R^n)) # calculate the option price and return
+}
+```
+
+```{r}
+opt_price(S = 160,n = 3,X = 150,u = 1.5,d = 0.5,R = 1.2)
+```
+
+Also, we have **put** option price $\mathrm{P}$ with price formula 
+$$
+\mathrm{P} = \frac{\sum_{j=0}^{n}\binom{n}{j}p^{n}(1-p)^{n-j}\times \max(0,X-S_{0}u^{n}d^{n-j})}{R^{n}}
+$$
+
+thus we can add `type` argument from call/put
+
+```{r echo=TRUE}
+# define general function
+opt_price <- function(S, n, X, u, d, R, type) {
+  p <- (R - d) / (u - d)
+  tree <- c()
+  if (type == "call") {
+    for (i in 0:n) {
+      tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X)
+    }
+    return(sum(tree) / (R^n))
+  } else if (type == "put") {
+    for (i in 0:n) {
+      tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, X - S * (u^i) * d^(n - i))
+    }
+    return(sum(tree) / (R^n))
+  } else {
+    return("Please choose option type call/put.")
+  }
+}
+```
+
+For call option price:
+```{r}
+opt_price(S = 160, n = 3, X = 150, u = 1.5, d = 0.5, R = 1.2, type = "call")
+```
+
+For put option price:
+
+```{r}
+opt_price(S = 160, n = 3, X = 150, u = 1.5, d = 0.5, R = 1.2, type = "put")
+```
+```
+
+
+# Reference
+[BOPM - RDocumentation](https://www.rdocumentation.org/packages/QFRM/versions/1.0.1/topics/BOPM)
+
+[Binomial Options Pricing Model with R](https://github.com/uigc/bopm)
