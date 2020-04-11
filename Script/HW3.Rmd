@@ -27,6 +27,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 1. Try to find the package to simplify the calculation
 2. Try to code by myself
 
+![](https://imgur.com/iduIh3Q.png)
+
 * For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
  + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW3.Rmd)
  + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
@@ -49,6 +51,9 @@ o <- Opt(Style = "European", Right = "Call", S0 = 160, ttm = 3, K = 150) # An Op
 ```
 This function only recombining **symmetric** binomial tree.
 In HW case, we need to construct asymmetric one. 
+
+Note: `Opt` arguments
+![](https://imgur.com/tW94xDr.png)
 
 # With asymmetric binomial tree
 
