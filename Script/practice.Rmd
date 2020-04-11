@@ -252,7 +252,7 @@ $$
 
 >**債券的存續期間(Duration)，就是用來衡量市場利率的變化對債券價格的敏感度，一檔債券的存續期間愈長，就代表這檔債券對利率比較敏感，也就是只要市場利率稍有變化，就會造成債券價格較大的波動**。存續期間較短，當然對市場利率的敏感度就會比較低。
 
-[怪老子理財-存續期間：債券價格波動之指標](https://www.masterhsiao.com.tw/CatBonds/Duration/Duration.php)
+[存續期間：債券價格波動之指標ㄦ-怪老子理財](https://www.masterhsiao.com.tw/CatBonds/Duration/Duration.php)
 
 * Consider the sensitivity of the price of  **level-coupon bond** wrt to the interest rate.
 
@@ -288,6 +288,7 @@ $$
 $$
 
 3. Define MD of the level-coupon bond is 
+
 $$
 \mathrm{MD}\triangleq \frac{1}{P} \sum_{i=1}^{n} \frac{C_{i}}{(1+y)^{i}} \cdot i + \frac{nF}{(1+r)^{n}}
 $$
@@ -334,6 +335,7 @@ $$
 $$
 
 Thus, the percentage price change is equal to negative Modified Duration multiply the yield change.
+
 $$
 \begin{equation}
 \begin{aligned}
@@ -354,26 +356,93 @@ $$
 
 ## Convexity 
 
-(insert formula)
+$$
+\mathrm{convexity} \triangleq \frac{\partial^{2}{P}}{\partial{y}^{2}} \frac{1}{P}
+$$
 
-## Immutization
+# Immutization
+
+>A portfolio is immunized when it is “unaffected” by interest rate changes.
+
+[Bond Portfolio Management - NYU Stern](http://people.stern.nyu.edu/ashapiro/courses/B01.231103/FFL13.pdf)
 
 # Spot rate 
 Compare the different bonds to the present base.
 Change the coumpound rate in coupon bonds to sigle rate. 
 Useful when you have investment profolio.
 
-(insert formula)
+1. The i-period spot rate $S(i)$ is the yield to maturity of an i-period zero-coupon bond.
+
+2. The PV of one dollar i-periods from now is by definition
+
+$$
+\frac{1}{\left [ (1+S(i) \right ]^{i}}
+
+
+$$
+
+which is the price of the i-period zero-coupon bond.
+
+3. The **one-period spot rate** is called the **short rate**
+
+4. Spot rate curve: Plot of spot rate vs. maturity: $S(1),S(2),...S(n)$
+
+While there's no zero-coupon bond in the market for long periods.
+
+Spot rate for longer periods cannot be directly observed. 
+
+Consider a level-coupon bond:
+
+$$
+P = \sum_{i=1}^{n} \frac{C}{\left [ 1+S(i) \right ]^{i}} + \frac{F}{\left [ 1+S(n) \right ]^{n}}
+$$
+
+It discount each cash flow along the spot rate. 
 
 # Forward rate 
 
-(insert formula)
-(insert example)
+Consider 2 types of investment:
+
+1. Invest 1 dollar to $j$ periods, get $\left [ 1+S(j) \right ]^{j}$ dollar at time $j$.
+
+2. Invest 1 dollar in bonds for $i$ periods, at time $i$ invest proceeds in bonds for another $j-i$ periods, where $j>i$. 
+
+We will have $\left [ 1+S(i) \right ]^{i} \cdot \left [ 1+S(i,j) \right ]^{j-i}$ dollars at time $j$.
+
+Define $S(i,j)$ to be the $(j-i)$ period spot rate $i$ periods from now, and called it forward rate $f(i,j)$.
+
+Since the PV of these 2 kinds of investment should be equal, we have 
+
+$$
+\left [ 1+S(j) \right ]^{j} =\left [ 1+S(i) \right ]^{i} \cdot \left [ 1+S(i,j) \right ]^{j-i}
+$$
+
+thus we have 
+
+$$
+S(i,j) =
+\left \{  \frac{\left [ 1+S(j) \right ]^{j}}{\left [ 1+S(i) \right ]^{i}}\right \}^{\frac{1}{j-i}} -1 \triangleq f(i,j)
+$$
+
+[如何用理論即期利率算出遠期利率-綠角財經筆記](http://greenhornfinancefootnote.blogspot.com/2010/08/how-to-compute-forward-rates-from.html)
 
 # Options 
 ## Definition 
 
+>選擇權是一種契約，一種權利的交易。
+>顧名思義你有權利決定是否要履行契約，也可以選擇 " 買 " 這個權利或 " 賣 " 這個權利！
+>買方，就是買進權利的角色；賣方，則是賣出權利的角色。
+
+![選擇權買賣方vs.買賣權](http://www.cmoney.tw/learn/cmstatic/learn/59/20180731171334892.png)
+
 ## Types of options
+
+European vs. American 
+
+歐式選擇權（European Option）則是指買方有權利、但無須負義務，而**只能在到期日當天**，以履約價格買進或賣出標的資產，亦即這種選擇權**不可提早執行**，迨至到期時雙方仍是以履約價格進行交割。大部分在店頭市場交易的選擇權係為歐式選擇權。
+
+美式選擇權（American Option）係指買方有權利、但無須負義務，**在到期日之前或當天**，以履約價格買進或賣出標的資產，換言之，這種選擇權**可以被提早執行**，到期時雙方則是以履約價格進行交割。大部分在交易所掛牌的選擇權商品均為美式選擇權。
+
 
 ## Payoff 
 ### Convinient convetions
@@ -391,7 +460,7 @@ $$
 C = \max (0,S-X)
 $$
 
-When the **stock price is lower than the strike pirce** (S<X), the investor will give up call option.
+When the **stock price is lower than the strike pirce** ($S<X$), the investor will give up call option.
 
 * The payoff of a pu at expriation is 
 
@@ -399,11 +468,11 @@ $$
 P = \max (0,X-S)
 $$
 
-When the **stock price is higher than the strike pirce** (S>X), the investor will give up put option.
+When the **stock price is higher than the strike pirce** ($S>X$), the investor will give up put option.
 
 ## Strategy 
 
-(insert image)
+![選擇權的四個象限-統一期貨](https://www.pfcf.com.tw/photo/form/156498175856135.jpg)
 
 ## Terminology
 
@@ -417,7 +486,59 @@ When the **stock price is higher than the strike pirce** (S>X), the investor wil
 |Put|130|100|**In**-of-the-money(賺錢)|
 
 ## Straddle vs. strangle
-(strategy)
+>現在談到的跨、勒式，則是 call 和 put同時交易。
+買進 跨式/勒式，就是大漲你賺，大跌你也賺！
+賣出 跨式/勒式，就是不漲不跌最好，盤整我最賺！
+
+波動率策略: 你預期市場未來是**大漲大跌** 或 **盤整**
+
+1. 不去預測未來指數漲跌
+
+2. 同時交易 call 和 put
+
+3. 同時做 買進 或 賣出，例如買進跨式，就是同時買進call/put
+
+4. 獲利的關鍵在 判斷未來市場的波動率是大是小
+
+ 
+買進跨式部位 Long Straddle
+大漲你賺，大跌你也賺！！！
+市場正好被某個 重大事件影響，但不清楚事情的演變會如何。
+
+這時候你可以利用 買進跨式部位策略，只要出現 大漲或大跌 就可以獲利。
+
+ 
+使用時機：
+
+1. 重大事件醞釀加溫時
+
+2. 重大政策宣布前日
+
+3. 重大選舉前幾日
+
+4. 連續假期開始前
+
+5. 股市出現天量時
+
+6. 預期會有大波段，但無法預期漲或跌
+
+### 預期大漲或大跌
+
+![買進跨式部位 Long Straddle](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814152736332.jpg)
+
+![買進勒式部位 Long Strangle](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814162608116.jpg)
+
+### 預期波動不大
+
+![賣出跨式部位 Short Straddle](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814152753108.jpg)
+
+![賣出勒式部位 Short Strangle](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814162957732.jpg)
+
+交易策略：
+![](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814160813836.jpg)
+
+
+[選擇權的跨式與勒式-期權天空~日盛巧克力](https://js7eleven.pixnet.net/blog/post/239815222)
 
 ## Option pricing model 
 
