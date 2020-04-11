@@ -252,7 +252,7 @@ $$
 
 >**債券的存續期間(Duration)，就是用來衡量市場利率的變化對債券價格的敏感度，一檔債券的存續期間愈長，就代表這檔債券對利率比較敏感，也就是只要市場利率稍有變化，就會造成債券價格較大的波動**。存續期間較短，當然對市場利率的敏感度就會比較低。
 
-[存續期間：債券價格波動之指標ㄦ-怪老子理財](https://www.masterhsiao.com.tw/CatBonds/Duration/Duration.php)
+[存續期間：債券價格波動之指標-怪老子理財](https://www.masterhsiao.com.tw/CatBonds/Duration/Duration.php)
 
 * Consider the sensitivity of the price of  **level-coupon bond** wrt to the interest rate.
 
@@ -377,8 +377,6 @@ Useful when you have investment profolio.
 
 $$
 \frac{1}{\left [ (1+S(i) \right ]^{i}}
-
-
 $$
 
 which is the price of the i-period zero-coupon bond.
@@ -485,7 +483,7 @@ When the **stock price is higher than the strike pirce** ($S>X$), the investor w
 |Put|100|100|At-of-the-money|
 |Put|130|100|**In**-of-the-money(賺錢)|
 
-## Straddle vs. strangle
+## Straddle vs. Strangle
 >現在談到的跨、勒式，則是 call 和 put同時交易。
 買進 跨式/勒式，就是大漲你賺，大跌你也賺！
 賣出 跨式/勒式，就是不漲不跌最好，盤整我最賺！
@@ -535,6 +533,7 @@ When the **stock price is higher than the strike pirce** ($S>X$), the investor w
 ![賣出勒式部位 Short Strangle](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814162957732.jpg)
 
 交易策略：
+
 ![](http://www.cmoney.tw/learn/cmstatic/learn/42/20140814160813836.jpg)
 
 
@@ -560,19 +559,16 @@ Also called Black-Scholes-Merton Model
 
 ### Formula 
 
-
 $$
 \begin{equation}
 \begin{aligned}
 c &= S_{0}N(d_{1})-Ke^{-rT}N(d_{2}) \\
 p &= Ke^{-rT}N(-d_{2})-S_{0}N(-d_{1}) \\
-
 where \ \  d_{1} &=  \frac{\ln(S_{0}/K)+(r+\sigma^{2}/2)T}{\sigma \sqrt(T)} \\
 d_{2} &=  \frac{\ln(S_{0}/K)+(r-\sigma^{2}/2)T}{\sigma \sqrt(T)} = \sigma \sqrt(T) \\
 \end{aligned}
 \end{equation}
 $$
-
 
 * Concept: 現價($S_{0}$) 服從常態分佈，履約價($K$)要折現回來，服從常態分佈。$\sigma$為標的物波動率(估計)。$r$為無風險利率。
 
@@ -592,6 +588,7 @@ S &= the \ current \ price \ of \ the \ underline \\
 \end{aligned}
 \end{equation}
 $$
+
 * Geometric Bronian Motion 
 
 $$
