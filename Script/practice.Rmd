@@ -231,20 +231,126 @@ $$
 Example(TBD):
 
 # Bond price volatility
+Volatility measures how bond price changes wrt change of the interest rate 
+
+Sensitivity of the percentage price change wrt to the change of the interest rate:
+$$
+\frac{\frac{\partial{P}}{\partial{y}}}{P}
+$$
 ## Duration 
 ### Macaulay duration (MD)
 
-(insert formula)
+The Macaulay duration (MD) is a weighted average of the times to an asset's cash flows. 
+
+The weights are cash flow's present value divided by the asset's price.
+
+$$
+\mathrm{MD}\triangleq \frac{1}{P} \sum_{i=1}^{n} \frac{C_{i}}{(1+y)^{i}} \cdot i
+$$
+
+>投資債券屬於固定收益的一種，主要的獲利來自於債券的配息，所以理應是非常穩定的投資標的。持有債券就好像是把錢借出去，然後靠著收取利息來獲利是一樣的，只要配息及本金可以拿回來，沒有不會獲利的道理。雖說債券依賴配息獲利，但是因為債券的到期時間較長，本金及配息很久以後才拿得回來，所以**債券的價值很容易就受到市場利率的變化而產生波動**。
+
+>**債券的存續期間(Duration)，就是用來衡量市場利率的變化對債券價格的敏感度，一檔債券的存續期間愈長，就代表這檔債券對利率比較敏感，也就是只要市場利率稍有變化，就會造成債券價格較大的波動**。存續期間較短，當然對市場利率的敏感度就會比較低。
+
+[怪老子理財-存續期間：債券價格波動之指標](https://www.masterhsiao.com.tw/CatBonds/Duration/Duration.php)
+
+* Consider the sensitivity of the price of  **level-coupon bond** wrt to the interest rate.
+
+1. The price of the level-coupon bond is 
+
+$$
+P = \frac{C_{1}}{1+r} +\frac{C_{2}}{(1+r)^2}+\frac{C_{n}+F}{(1+r)^n}  
+$$
+
+2. The price change wrt return rate is 
+
+$$
+\begin{equation}
+\begin{aligned}
+
+\frac{\mathrm{d}P }{\mathrm{d} (1+r)} &= \frac{\mathrm{d}\left [ C_{1}(1+r)^{-1}+...+(C_{n}+F)(1+r)^{-n}  \right ] }{\mathrm{d} (1+r)} \\
+&= -C_{1}(1+r)^{-2} + (-2)C_{2}(1+r)^{-3}+...+(-n)(C_{n}+F)(1+r)^{-n-1}
+\end{aligned}
+\end{equation}
+
+$$
+
+3. The percentage change in $P$ and the percentage change in $1+r$ is 
+
+$$
+\begin{equation}
+\begin{aligned}
+\frac{\%  \Delta \ in \  P}{\%  \Delta \ in \  (1+r)} &= \frac{\frac{\mathrm{d}P }{P}}{\frac{\mathrm{d}(1+r) }{1+r}} \\ 
+&= \frac{\mathrm{d} P}{\mathrm{d} (1+r)} \frac{1+r}{P}\\
+&= \left [  -C_{1}(1+r)^{-1} + (-2)C_{2}(1+r)^{-2}+...+(-n)(C_{n}+F)(1+r)^{-n}\right ]/P
+\end{aligned}
+\end{equation}
+$$
+
+3. Define MD of the level-coupon bond is 
+$$
+\mathrm{MD}\triangleq \frac{1}{P} \sum_{i=1}^{n} \frac{C_{i}}{(1+y)^{i}} \cdot i + \frac{nF}{(1+r)^{n}}
+$$
+
+then we have 
+
+$$
+\frac{\%  \Delta \ in \  P}{\%  \Delta \ in \  (1+y)} = -\mathrm{MD}
+$$
 
 ### Modified duration 
 
-(insert formula)
+>雖然1+y的變化率對價格的變化率很重要，其實投資者更想知道殖利率的變化量(Δy)，對價格變化率(Δp/p)的敏感程度。也就是殖利率每上升1%時，債券價格會變化多少。
+
+Since 
+
+$$
+\begin{equation}
+\begin{aligned}
+\frac{\%  \Delta \ in \  P}{\%  \Delta \ in \  (1+y)} 
+&= \frac{\mathrm{d} P}{\mathrm{d} (1+y)} \frac{1+y}{P}\\
+&=  -\mathrm{MD}
+\end{aligned}
+\end{equation}
+$$
+
+thus we have 
+
+$$
+\begin{equation}
+\begin{aligned}
+\frac{\% \Delta \ in \  P}{  \Delta \ in \  (1+y)} 
+&= \frac{\mathrm{d} P}{\mathrm{d} (1+y)} \frac{1}{P}\\
+&=  -\frac{\mathrm{MD}}{1+y} \\
+&\triangleq - \mathrm{Modified \ Duration}
+\end{aligned}
+\end{equation}
+$$
+
+Note that if we measure in the annual interest rate, then we have 
+
+$$
+\frac{\mathrm{MD}}{1+\frac{YTM}{n}} = \mathrm{Modified \ Duration}
+$$
+
+Thus, the percentage price change is equal to negative Modified Duration multiply the yield change.
+$$
+\begin{equation}
+\begin{aligned}
+\% \Delta \ in \  P &= - \mathrm{Modified \ Duration} \cdot \Delta \ in \  (1+y) \\
+\end{aligned}
+\end{equation}
+$$
+
+
 
 Example: Modified duration 11.54, change in yield 0.1%, the price should **decrease 1.154%**
 
 ### Effective duration 
 
-(insert formula)
+$$
+\frac{P_{-}-P_{+}}{P_{0}(y_{+}-y_{-})}
+$$
 
 ## Convexity 
 
