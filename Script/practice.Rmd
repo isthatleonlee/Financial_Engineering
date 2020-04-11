@@ -1,5 +1,5 @@
 ---
-title: "In class practice"
+title: "In class practice & notes"
 author: "Lowson Li"
 output:
   html_notebook:
