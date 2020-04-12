@@ -609,15 +609,146 @@ where $S_{t}$ is the stock price at time $t$,  $\mu$ is the drift rate(股價年
 # Random walks 
 
 ## Simulation 
-```{r}
-sample(x = c(-1,1),size = 100,replace = TRUE)
 
-for (i in 1:100) {
+```{r echo=TRUE}
+RW <- function(N, x0, mu, variance) {
+  z<-cumsum(rnorm(n=N, mean=0, 
+                  sd=sqrt(variance)))
+  t<-1:N
+  x<-x0+t*mu+z
+  return(x)
+  }
+# mu is the drift
 
-}
+P1<-RW(100,10,0,0.0004)
+P2<-RW(100,10,0,0.0004)
+plot(P1, main="Random Walk without Drift", 
+     xlab="t",ylab="Price", ylim=c(9.7,10.3),
+     typ='l', col="red")
 ```
 
-## BOPM
-### Notation 
-R: 報酬率(連續複利)
-r: 無風險利率
+```{r echo=TRUE}
+plot(P2, main="Random Walk without Drift", 
+     xlab="t",ylab="Price", ylim=c(9.7,10.3),
+     typ='l', col="blue")
+```
+
+[Techincal Analysis with R](https://bookdown.org/kochiuyu/Technical-Analysis-with-R/simulation.html)
+
+# BOPM
+## Assumption
+
+*   **Time is discrete** and measure in periods.
+* Stock is following a **discrete random walk**.
+* If the current stock price is $S$, it can go to $Su$ with probability $q$ and $Sd$ with probability $1-q$, where $0<q<1$ and $u>d$.
+* $u>R>d$ must hold to rule out arbitrage.
+
+## Notation 
+
+* R: gross return
+* r: the continuously compounded riskless rate per period, from $R\triangleq e^{r}$
+* S: stock price 
+* u: mutiplier whehn price goes up
+* d: mutiplier whehn price goes down
+* X: strike price 
+* n: numbers of periods to expiration
+
+## Payoff 
+
+Single period - call option 
+
+$$
+C_{u} = max(0,Su-X) \\
+C_{d} = max(0,Sd-X) 
+$$
+
+## Pricing 
+
+* Consider no-arbitrage opportunity market
+* Invest $h$ shares of stock and $B$ dollars bond with risk-free return rate $R$.
+* $h$ and $B$ are unknown.
+
+We have 
+
+$$
+hSu+RB = C_{u} \\
+hSd+RB = C_{d}
+$$
+
+Solve the equation,
+
+$$
+\begin{equation}
+\begin{aligned}
+h &= \frac{C_{u}-C_{d}}{Su-Sd} \geq 0 \\
+B &= \frac{uC_{d}-dC_{u}}{(u-d)R} \\
+\end{aligned}
+\end{equation}
+$$
+
+By no-arbitrage principle, the European call should cost the same as the equivalent portfolio.
+
+$$
+C=hS+B
+$$
+
+Substitute $h$ and $B$, 
+
+$$
+\begin{equation}
+\begin{aligned}
+hS+B &= (\frac{C_{u}-C_{d}}{Su-Sd})S+\frac{uC_{d}-dC_{u}}{(u-d)R} \\
+&= \frac{(\frac{R-d}{u-d})C_{u}+(\frac{u-R}{u-d})C_{d}}{R}
+\end{aligned}
+\end{equation}
+$$
+
+Notice that the option value is independent of $q$ now.
+The option value is hence independent of the expected value of the future stock $qSu+(1-q)Sd$. 
+The option value depends on $u$,$d$(the size of price changes), the investor must agree with. 
+
+Pseudo probability 
+$$
+\begin{equation}
+\begin{aligned}
+hS+B &= \frac{(\frac{R-d}{u-d})C_{u}+(\frac{u-R}{u-d})C_{d}}{R} \\ 
+&= \frac{pC_{u}+(1-p)C_{d}}{R} \\
+p &\triangleq \frac{R-d}{u-d} \\
+\end{aligned}
+\end{equation}
+$$
+
+By backward induction, for 2 periods we have  
+
+$$
+C_{u} = \frac{pC_{uu}+(1-p)C_{ud}}{R}  \\
+C_{d} = \frac{pC_{du}+(1-p)C_{dd}}{R}
+$$
+
+where 
+
+$$
+\begin{equation}
+\begin{aligned}
+C &= \frac{pC_{u}+(1-p)C_{d}}{R} \\
+&= \frac{p \frac{pC_{uu}+(1-p)C_{ud}}{R}+(1-p)\frac{pC_{du}+(1-p)C_{dd}}{R}}{R} \\
+&=\frac{p^2C_{uu}+2p(1-p)C_{ud}+(1-p)^2C_{dd}}{R^2} \\
+&=\frac{p^2 \max(0,Suu-X)+2p(1-p)\max(0,Sud-X)+(1-p)^2\max(0,Sdd-X)}{R^2}
+\end{aligned}
+\end{equation}
+ 
+$$
+
+For n periods
+
+$$
+C = \frac{\sum_{j=0}^{n}\binom{n}{j}p^{j}(1-p)^{n-j}\max(0,Su^{j}d^{n-j}-X)}{R^{n}} \\
+P = \frac{\sum_{j=0}^{n}\binom{n}{j}p^{j}(1-p)^{n-j}\max(0,X-Su^{j}d^{n-j})}{R^{n}}
+$$
+
+where 
+
+$$
+p_{j} \triangleq \frac{\binom{n}{j}p^{j}(1-p)^{n-j}}{R^{n}}
+$$
+
