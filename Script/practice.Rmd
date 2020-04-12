@@ -736,7 +736,6 @@ C &= \frac{pC_{u}+(1-p)C_{d}}{R} \\
 &=\frac{p^2 \max(0,Suu-X)+2p(1-p)\max(0,Sud-X)+(1-p)^2\max(0,Sdd-X)}{R^2}
 \end{aligned}
 \end{equation}
- 
 $$
 
 For n periods
