@@ -91,11 +91,22 @@ opt_price <- function(S, n, X, u, d, R) {
   p <- (R - d) / (u - d) # calculate the pseudo probability
   tree <- c() # create empty vector
   for (i in 0:n) {
-    tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X) # store payoff in the vector
+    tree[i+1] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X) # store payoff in the vector
   }
   return(sum(tree) / (R^n)) # calculate the option price and return
 }
 ```
+
+Notice that the gross resturn is equivelent to 
+
+$$
+R \triangleq e^{\hat{r}}
+$$
+
+
+where $\hat{r}$ is the continuously compounded riskless rate per period
+
+Thus, the call price is 
 
 ```{r}
 opt_price(S = 160,n = 3,X = 150,u = 1.5,d = 0.5,R = 1.2)
@@ -115,12 +126,12 @@ opt_price <- function(S, n, X, u, d, R, type) {
   tree <- c()
   if (type == "call") {
     for (i in 0:n) {
-      tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X)
+      tree[i + 1] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, S * (u^i) * d^(n - i) - X)
     }
     return(sum(tree) / (R^n))
   } else if (type == "put") {
     for (i in 0:n) {
-      tree[i] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, X - S * (u^i) * d^(n - i))
+      tree[i + 1] <- choose(n, i) * (p^i) * (1 - p)^(n - i) * max(0, X - S * (u^i) * d^(n - i))
     }
     return(sum(tree) / (R^n))
   } else {
@@ -138,6 +149,25 @@ For put option price:
 
 ```{r}
 opt_price(S = 160, n = 3, X = 150, u = 1.5, d = 0.5, R = 1.2, type = "put")
+```
+
+Validate the put price with **put call parity**
+
+$$
+\begin{equation}
+\begin{aligned}
+C+Xe^{-rT} &= P+S \\
+where \ \  C &= call \ premium \\
+Xe^{-rT} &= present \ value \ of \ the \ strike \\
+P &= put \ premium \\ 
+S &= the \ current \ price \ of \ the \ underline \\ 
+\end{aligned}
+\end{equation}
+$$
+
+
+```{r}
+85.06944 + 150/(1.2^3) - 160
 ```
 
 # Reference
