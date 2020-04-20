@@ -20,6 +20,7 @@ Flow chart is embeded in the demo.
 |2|[Demo](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW2.nb.html)|[Source](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW2.Rmd)|
 |3|[Demo](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW3.nb.html)|[Source](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW3.Rmd)|
 
+|4|[Demo](https://isthatlowsonli.github.io/Financial_Engineering/Script/HW4.nb.html)|[Source](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW4.Rmd)|
 
 ## Getting Started
 
