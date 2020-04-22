@@ -24,28 +24,142 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 # Strategy
-1. Try to find the package to simplify the calculation
+1. Try to replicate the calculation from course slide.
 2. Try to code by myself
 
-![](https://imgur.com/iduIh3Q.png)
+![](https://imgur.com/eDWgVh8.png)
 
 * For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
- + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW3.Rmd)
+ + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW4.Rmd)
  + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
 
 # Load packages
-```{r}
+```{r echo=TRUE}
 library(dplyr)
-library(knitr)
-library(kableExtra)
 ```
 
 # Question
 
-A stock is currently priced at $75 and has a σ of 0.35.
+A stock is currently priced at 75 and has a $\sigma$ of 0.35.
 It will pay two $1 dividends in 1 month and 4 months.
-If r = 6%, what is the value of a European put and call option with an exercise 8 price of $65 maturing in 6 months?
+If $r$ = 6%, what is the value of a European put and call option with an exercise 8 price of $65 maturing in 6 months?
 
+# Definition of BS formula
 
+Recall the BS formula 
+
+$$
+c = SN(d_{1}) - Xe^{-r\tau}N(d_{2})
+$$
+
+where $N(\cdot)$ is normal distribution function and 
+
+$$
+\begin{equation}
+\begin{aligned}
+d_{1} &= \frac{\mathrm{ln}(S/X)+(r+\sigma^{2}/2)\tau}{\sigma \sqrt{\tau}} \\ 
+d_{2} &= d_{1} - \sigma \sqrt{\tau} \\
+\end{aligned}
+\end{equation}
+$$
+
+where $r$ is usually taken as the risk-free interest rate on an investment maturaing in $\tau$ periods, at the expiration of the option contract. $\sigma$ is the annualized varianve of the rate of return on the stock, which can be estimated using historical data on stock prices or stock returns.
+
+Consider the stock with dividends such that 
+
+$$
+S= D +\hat{S}
+$$
+
+the new $\hat{S}$ is 
+
+$$
+\hat{S} = S-D
+$$
+
+Given the month when dividends is pay, we can write a function to calculate the dividends
+
+```{r echo=TRUE}
+dividends <- function(d_per_month, month_vec, r) {
+  if (is.vector(month_vec) == TRUE) {
+    D <- sum(d_per_month * exp(-r * month_vec / 12))
+    return(D)
+  } else {
+    return(print("Check the month specification."))
+  }
+}
+```
+
+```{r}
+dividends(1,c(1,4),0.06)
+```
+
+Given he stock price $S$ is 75, the stock price $\hat{S}$ used in BS formula will be 
+
+```{r}
+75 - dividends(1,c(1,4),0.06)
+```
+
+Thus we can us BS formula to calculate the call option price.
+For put price, by put-call parity
+
+$$
+\begin{equation}
+\begin{aligned}
+p &= c+Xe^{-r\tau}-S\\
+&=Xe^{-r\tau}N(-d_{2}) -SN(-d_{1})\\
+\end{aligned}
+\end{equation}
+$$
+
+```{r echo=TRUE}
+bs_opt <- function(S_hat, X, r, sigma, tau) {
+  d1 <-
+    (log(S_hat / X) + (r + (sigma^2) / 2) * tau) / (sigma * sqrt(tau))
+  d2 <- d1 - sigma * sqrt(tau)
+  c <- S_hat * pnorm(d1) - X * exp(-r * tau) * pnorm(d2)
+  p <- X * exp(-r * tau) * pnorm(-d2) - S_hat * pnorm(-d1)
+
+  return(cat("Call option price: ", c, "\n", "Put option price: ", p))
+}
+```
+
+Notice that the time until maturiy is in annual base.
+
+```{r}
+bs_opt(73.02479,65,0.06,0.35,6/12)
+```
+
+# Clean version of code
+
+```{r}
+bs_opt <- function(S, X, r, sigma, tau, d_per_month, month_vec) {
+  if (is.vector(month_vec) == TRUE) {
+    D <- sum(d_per_month * exp(-r * month_vec / 12))
+    S_hat <- S - D
+    d1 <-
+      (log(S_hat / X) + (r + (sigma^2) / 2) * tau) / (sigma * sqrt(tau))
+    d2 <- d1 - sigma * sqrt(tau)
+    c <- S_hat * pnorm(d1) - X * exp(-r * tau) * pnorm(d2)
+    p <- X * exp(-r * tau) * pnorm(-d2) - S_hat * pnorm(-d1)
+
+    return(cat("Call option price: ", c, "\n", "Put option price: ", p))
+  } else {
+    return(print("Check the month specification."))
+  }
+}
+```
+
+```{r}
+bs_opt(
+  S = 75, # current price
+  X = 65, # strike price
+  r = 0.06, # continuously-compounded one-period interest rate
+  sigma = 0.35, # annualized variance of the rate of return on the stock
+  tau = 6 / 12, # time until maturity, annualized
+  d_per_month = 1, # dividends per month
+  month_vec = c(1, 4) # vector of month with dividends
+  )
+```
 
 

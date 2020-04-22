@@ -751,3 +751,280 @@ $$
 p_{j} \triangleq \frac{\binom{n}{j}p^{j}(1-p)^{n-j}}{R^{n}}
 $$
 
+# Risk Neutral Pricing Theory
+
+## Meaning
+
+風險中性定價理論於資本市場中的意義
+
+1. 市場不存在任何套利可能性的條件下，如果衍生證券的價格依然依賴於可交易多基礎證券，則 **衍生證券的價格是與投資者的風險態度無關的**
+
+2. 在數學上表現為：研陞證券定價的微分方程中，並不包含有受投資者風險態度的變數，尤其是期望收益率
+
+3. **風險中係病假與投資者的風險制度無關**，所有投資者都是風險中性的
+
+4. 在風險中係的經濟環境中，**投資者並不要求任何的風險補償或風險報酬**，所以基礎證券與衍生證券的期望收益率都恰好等於無風險利率
+
+5. 由於不存在任何的風險補償或風險報酬，市場的貼現玉也恰好等於無風險利率。**所以基礎證券或衍生證券的任何盈虧經無風險利率的貼現就是他們的現值**
+
+
+[The valuation of options for alternative stochastic processes](https://www.sciencedirect.com/science/article/abs/pii/0304405X76900234)
+
+## Example 
+
+Recall BOPM, the one-period expected payoff on a call option is 
+
+$$
+\frac{pC_{u}+(1-p)C_{d}}{R}
+$$
+
+the equation can be written as 
+
+$$
+C_{t} = \frac{1}{R_{f}} \hat{E} \left [ \tilde{C}_{t+1} \right ]
+$$
+
+where $C_{t}$ is the call option at time $t$ and $\hat{E} \left [ \tilde{C}_{t+1} \right ]$ is the expected value of the call at time $t+1$ **in a risk-neutral world**. Therefore,  $C_{t}$ is the "risk-neutral expected value" of $\tilde{C}_{t+1}$ dicsounted at the risk-free rate.
+
+define 
+
+$$
+\frac{1}{R_{f}} = e^{-r}
+$$
+
+where $r$ is defined as the continuously-compounded one-period interest rate.
+
+## Forward contract 
+
+1. A forward contract is an agreement where 2 parties agree to exchange an asset at some future date for a pre-agreed price.
+
+2. The long(short) party agrees to receive(deliver) the asset in exchange for paying(receiving) this pre-agreed price at a price at a future date, date $T$.
+
+3. No payment occurs between the partirs at the time of the agreement of the contract, only at the maturity of the contract. 
+
+The pay off to the long party at the maturity of the forward contract can be written as
+
+$$
+\tilde{S}_{T} - K
+$$
+
+where $\tilde{S}_{T}$ is the underlying asset price at the maturity of the forward contract. And $K$ is the previously agreed upon **delivery** price for the forward contract, which is said to equal the **forward price** at the agreement date fo the contract. 
+
+## Portfolios
+
+1. Assume that the underlying asset pays no dividends
+
+2. Define $f$ as the current date $t$ value of the forward contract 
+
+3. $\tau \equiv T - t$ as its time until maturity
+
+* At date $t$:
+    Portfolio A: A long position in one forward contract writtern on an asset having current value of $S$ and haveing a forward price of $K$.
+    Portfolio B: One share of the underlying asset plus borrowing an amount $e^{-r\tau}K$
+
+* At date $T$:
+    Portfolio A: $\tilde{S}_{T} - K$
+    Portfolio B: $\tilde{S}_{T} - K$
+    
+Since the 2 portfolio produce exactly the same cash flow at date $T$, the absence of arbitrage implies that their values at date $t$ must also be the same, that is
+
+$$
+f = S-e^{-r\tau}K
+$$
+
+Applying risk-neutral method, the current value of a long position is 
+
+$$
+f = e^{-r\tau} \hat{E} \left [ \tilde{S}_{T} - K \right ] = e^{-r\tau} \hat{E} \left [ \tilde{S}_{T}\right ]-e^{-r\tau} K 
+$$ 
+
+in the risk-neutral wourld, 
+
+$$
+\hat{E} \left [ \tilde{S}_{T}\right ] = Se^{r\tau}
+$$
+
+thus 
+
+$$
+f = e^{-r\tau}Se^{r\tau} - e^{-r\tau}K = S-e^{-r\tau}K
+$$
+
+which is the same as our earlier no-arbitrage derivation. Thus, the "risk-neutral" technique also works for forward contracts. Note when contract is agreed to initially, $f=0$ and $K=F$, where $F$ is the initial forward price. 
+
+we have 
+
+$$
+\begin{equation}
+\begin{aligned}
+
+0 &= S-Fe^{-r\tau} \\
+\Rightarrow F &=Se^{r\tau} \\
+
+\end{aligned}
+\end{equation}
+$$
+
+## Risk-adjusted of return
+
+$$
+f = e^{-\theta\tau} \hat{E} \left [ \tilde{S}_{T}\right ]-e^{-r\tau} K 
+$$
+
+where $\theta$ is the **risk-adjested rate of return** on **risky asset**.
+
+$\theta$ depends on risk aversion and might be the result of the **CAPM**(Capital Asset Pricing Model). 
+
+$$
+\theta =r+\beta(E\left [ \tilde{r}_{m}  \right ]-r)
+$$
+
+if $\theta$ is the true expected rate of return on the asset, then $E\left [ \tilde{S}_{T}\right ]=Se^{\theta\tau}$. We have
+
+$$
+f = e^{-\theta \tau}Se^{\theta \tau} - e^{-r\tau}K = S-Ke^{-r\tau}
+$$
+
+Notice that the result are the same as the case we presume
+
+1. The expected rate if return on the asset is $r$
+2. the discounted factor is $r$ 
+
+while these 2 mistakes cancel out.
+
+# CAPM
+
+CAPM 建立在馬科維茨(Markowitz)模型基礎上，馬科維茨模型的假設也包含在其中：
+
+1. 投資者希望財富越多越好。效用是財富的函數，財富又是投資收益率的函數，因此可以認為效用為收益率的函數
+2. 投資者能事先知道投資收益率的概率分佈為正態分佈
+3. 投資風險用投資收益率的方差或標準差表示
+4. 影響投資決策的主要因素為期望收益率和風險兩項
+5. 投資者都遵守主宰原則(Dominance rule)，即同一風險水平下，選擇收益率較高的證券；同一收益率水平下，選擇風險較低的證券。以在無風險折現率R的水平下無限制地介入或貸出資金。
+
+CAPM 的附加假設條件：
+
+1. 可以在無風險折現率R的水平下無限制地借入或貸出資金
+2. 所有投資者對證券收益率概率分佈的看法一致
+3. 所有投資者具有相同的投資期限，而且只有一期
+4. 所有證券投資可以無限制的細分，在任一投資組合裡可以含有非整數股份
+5. 買賣證券沒有稅負及交易成本
+6. 所有投資者可以即時免費獲得充分的市場信息
+7. 不存在通貨膨脹，且折現率不變
+8. 投資者具有相同預期，及他們對預期收益率、標準差和證券之間的共變異數具有相同的預期值
+
+$$
+\theta =r+\beta(E\left [ \tilde{r}_{m}  \right ]-r)
+$$
+
+1. $r$ 是無風險收益率。筆記典型的無風險回報率是10年期的美國政府債券
+2. 如果股票投資者需要承受額外的風險，那麼他講需要再無風險回報率的基礎上多獲得相應的溢價
+3. 股票市場溢價(equity market premium) 就等於市場期望回報率減去無風險回報率($E\left [ \tilde{r}_{m}  \right ]-r$)。證券風險溢價就是股票市場溢價和$\beta$系數的乘積($\beta(E\left [ \tilde{r}_{m}  \right ]-r)$)
+
+# Risk-neutral derivation fo the BS formula
+
+Condiser an European call option on a non-dividend paying stock. Apply risk-neutral technique
+
+$$
+c = e^{-r\tau} \hat{E}\left [\mathrm{max}(0,\tilde{S}_{T}-X)  \right ]
+$$
+
+
+To evalurate the risk-neutral expectation, we need to make assupmtion regarding the probability distribution of $\tilde{S}_{T}$.
+
+E.g. assume the stock price follows the BOPM, we will have Cox, Ross, Rubinstein binomial option formula.
+
+Assume lognormal distribution for $\tilde{S}_{T}$
+
+Define 
+
+$\mu$ to be annual expected rate of return of the stock 
+
+$\sigma^{2}$ to be annualized variance of the rate of return of the stock
+
+If $\tilde{S}_{T}$ is a lognormally distributeed random variablem then we have 
+
+$$
+\mathrm{ln}(\tilde{S}_{T})\sim n(\mathrm{ln}(S)+(\mu-\sigma^{2}/2)\tau,\sigma^{2}\tau)
+$$
+
+where $n(\cdot)$ is the normal probability density function. 
+
+The  lognormal distribution is attractive because it alllows $\tilde{S}_{T}$  to take any value over $0$ to $\infty$. Continuoisly compounded returns on the stock over unit time internvals, $\mathrm{ln}(\tilde{S}_{t+1})-\mathrm{ln}(\tilde{S}_{t}) = \mathrm{ln}(\tilde{S}_{t+1}/\tilde{S}_{t})$ are normally distributed.
+
+Calculate $\hat{E}\left [\mathrm{max}(0,\tilde{S}_{T}-X)  \right ]$, if investor are risk-neutral then $\mu=r$.
+
+$$
+\mathrm{ln}(\tilde{S}_{T})\sim n(\mathrm{ln}(S)+(r-\sigma^{2}/2)\tau,\sigma^{2}\tau)
+$$
+
+$$
+\begin{equation}
+\begin{aligned}
+
+c &= e^{-r\tau} \hat{E}\left [\mathrm{max}(0,\tilde{S}_{T}-X)  \right ] \\
+&= \int_{X}^{\infty}(S_{T}-X)g(S_{T})\mathrm{d}S_{T}
+
+\end{aligned}
+\end{equation}
+$$
+
+Evaluating the integral, we have Black-Scholes formula
+
+$$
+c = SN(d_{1}) - Xe^{-r\tau}N(d_{2})
+$$
+
+where $N(\cdot)$ is normal distribution function and 
+
+$$
+\begin{equation}
+\begin{aligned}
+
+d_{1} &= \frac{\mathrm{ln}(S/X)+(r+\sigma^{2}/2)\tau}{\sigma \sqrt{\tau}} \\ 
+d_{2} &= d_{1} - \sigma \sqrt{\tau}
+
+\end{aligned}
+\end{equation}
+$$
+
+
+
+where $r$ is usually taken as the risk-free interest rate on an investment maturaing in $\tau$ periods, at the expiration of the option contract. $\sigma$ can be estimated using historical data on stock prices or stock returns.
+
+Denote $u_{i}$ as the continuously compounded stock return over the $i^{th}$ interval.
+
+$$
+\begin{equation}
+\begin{aligned}
+
+u_{i} \equiv \mathrm{ln}(\tilde{S}_{i}/\tilde{S}_{i-1}) \sim n((\mu-\sigma^{2}/2)\tau,\sigma^{2}\tau)
+
+
+\end{aligned}
+\end{equation}
+$$
+
+$$
+\begin{equation}
+\begin{aligned}
+
+\bar{u} &= \frac{1}{n}\sum_{i=1}^{n}u_{i} \\ 
+\hat{s}^{2} &= \frac{1}{n-1}\sum_{i=1}^{n}(u_{i}-\bar{u})^{2} \\
+
+\end{aligned}
+\end{equation}
+$$
+
+where 
+$$
+\sigma = \frac{\hat{s}}{\sqrt{\tau}}
+$$
+
+Consider a European option on a dividend paying stock. The current value of the stock $S$ equals to the present value of the (assumed) riskless dividends paid during the life of the option $D$.
+
+$$
+S= D +\tilde{S}
+$$
+
+Since the price of the stocl will decline when dividends are paid, $D$ will not received by the holder of a call, nor paid by the holder of a put. Therefore the option is essentially written on $\tilde{S}$, not on $S= D +\tilde{S}$. Thus, wee can value a European call or put by using the Black-Scholes formula replacing $S$ with $S= D +\tilde{S}$.
