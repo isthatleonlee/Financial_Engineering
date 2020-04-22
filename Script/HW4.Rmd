@@ -1,0 +1,51 @@
+---
+title: "HW4"
+author: "Lowson Li, R08323023"
+output:
+  html_notebook:
+    code_folding: show
+    highlight: tango
+    number_sections: yes
+    theme: simplex
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    toc: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+# Strategy
+1. Try to find the package to simplify the calculation
+2. Try to code by myself
+
+![](https://imgur.com/iduIh3Q.png)
+
+* For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+ + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW3.Rmd)
+ + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+
+# Load packages
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+```
+
+# Question
+
+A stock is currently priced at $75 and has a σ of 0.35.
+It will pay two $1 dividends in 1 month and 4 months.
+If r = 6%, what is the value of a European put and call option with an exercise 8 price of $65 maturing in 6 months?
+
+
+
+
