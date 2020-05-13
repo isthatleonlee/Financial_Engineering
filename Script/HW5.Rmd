@@ -1,0 +1,150 @@
+---
+title: "HW5"
+author: "Lowson Li, R08323023"
+output:
+  html_notebook:
+    code_folding: show
+    highlight: tango
+    number_sections: yes
+    theme: simplex
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    toc: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+# Strategy
+1. Try to replicate the calculation from course slide.
+2. Try to code by myself
+
+![](https://imgur.com/bdjXTRn.png)
+
+* For more details of the code and instructions, please visit my [Github](https://github.com/isthatlowsonli/Financial_Engineering)
+ + [Source code](https://github.com/isthatlowsonli/Financial_Engineering/blob/master/Script/HW5.Rmd)
+ + [Academic Portfolio](https://isthatlowsonli.github.io//Financial_Engineering/Script/practice.nb.html)
+
+# Load packages
+```{r echo=TRUE}
+library(dplyr)
+library(Sim.DiffProc)
+```
+
+# Question
+
+HW5 Option Pricing with Hull White Model
+
+1. 透過 Monte Carlo method
+    1. 對 Hull White Model 模擬 Short Rate
+    2. 將 Short Rate 帶入 Geometric Brownian Motion，r 換成 r(t) 模擬股價
+    3. 自訂選擇權履約價，對每一條 path 計算出到期日時的 PayOff
+2. 對所有 Path 的 PayOff 進行期望值計算，並折現回 t=0 的時間點
+3. 計算出 Call Price & Put Price
+
+# Simulate the Short Rate with Hull White Model
+
+Since I can't not find the stable function available in R to solve time-dependent theta, I fix theta in the rest of the code. If there's method to better simulate the one factor Hull-White Model, I will update it.
+
+```{r echo=TRUE}
+# Hull-White Model
+
+library(Sim.DiffProc)
+set.seed(2020)
+
+X <- HWV(
+  N = 1000,  # number of simulation steps 
+  M = 100, # number of trajectories
+  mu = 0.01,
+  theta = 2.5,
+  sigma = 0.3,
+  x0 = 0.01
+  )
+plot(X, plot.type = "single")
+```
+
+
+# Simulate the stock price with Geometric Brownian Motion
+
+```{r echo=TRUE}
+# Hull-White variables
+theta <- 2.5
+
+# GBM variables
+TM <- 10 # time to maturity, year
+N <- 100 # number of path
+dt <- 1 / 12 # time per period, count in month
+sigma <- 0.1 # volatility
+S0 <- 100 # initial stock price
+
+# payoff variables
+strike_price <- 105
+riskfree_rate <- 0.01
+
+# Hull-White model
+library(Sim.DiffProc)
+set.seed(2020)
+
+r <- Sim.DiffProc::HWV(
+  N = round(TM / dt) - 1, # number of simulation steps
+  M = N, # number of trajectories
+  mu = riskfree_rate,
+  theta = theta,
+  sigma = sigma,
+  x0 = riskfree_rate
+)
+
+# Simulation of GBM, with time varying interest rate
+S <- list()
+payoff_c <- c() # payoff of call option
+payoff_p <- c() # payoff of put option
+call_price <- c()
+put_price <- c()
+for (i in 1:N) {
+  n <- round(TM / dt) # how many periods
+  t_index <- seq(0, TM, length.out = n) # time index
+  W <- cumsum(rnorm(n)) * sqrt(dt) # standard brownian motion
+  X <-
+    (r[,i] - 0.5 * sigma^2) * t_index + sigma * W # r should be vector, varing with periods of time
+  S[[i]] <-
+    S0 * exp(X) # geomatric brownian motion, save each path in list
+  payoff_c[i] <-
+    max(0, tail(S[[i]], 1) - strike_price) * exp(-riskfree_rate) # present value of the payoff of call option
+  payoff_p[i] <-
+    max(0, strike_price - tail(S[[i]], 1)) * exp(-riskfree_rate) # present value of the payoff of put option
+  call_price <- mean(payoff_c)
+  put_price <- mean(payoff_p)
+}
+
+cat(
+  "Call option price: ",
+  round(call_price, 4),
+  "\n",
+  "Put option price: ",
+  round(put_price, 4)
+)
+
+```
+
+
+# References 
+
+[Brownian motion, binomial trees and Monte Carlo simulations](http://computationalfinance.lsi.upc.edu/?page_id=83)
+
+[Calibrated Hull and White short-rates with RQuantLib and ESGtoolkit](https://thierrymoudiki.wordpress.com/2014/12/24/calibrated-hull-and-white-short-rates-with-rquantlib-and-esgtoolkit/)
+
+[GeometricBrownianMotion: Simulate paths from a Arithmetic or Geometric Brownian Motion](https://rdrr.io/rforge/fExpressCertificates/man/GeometricBrownianMotion.html)
+
+[RQuantLib manual](https://cran.r-project.org/web/packages/RQuantLib/RQuantLib.pdf)
+
+[R语言模拟随机微分方程](https://wemp.app/posts/e9fa18e2-cb10-42a0-a7fa-37972d83a701)
+
+

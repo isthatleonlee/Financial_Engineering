@@ -1028,3 +1028,98 @@ S= D +\tilde{S}
 $$
 
 Since the price of the stocl will decline when dividends are paid, $D$ will not received by the holder of a call, nor paid by the holder of a put. Therefore the option is essentially written on $\tilde{S}$, not on $S= D +\tilde{S}$. Thus, wee can value a European call or put by using the Black-Scholes formula replacing $S$ with $S= D +\tilde{S}$.
+
+# Risk maanagement
+
+Definition: Risk management means selecting and maintaining portfolios with defined exposure to risks.
+Derivatives are essential to risk manangement.
+
+
+## Delta hedge 
+
+Hedge ratio:
+the delta of a derivative $f$
+
+$$
+\Delta \triangleq \frac{\partial f}{\partial S}
+$$
+
+Thus 
+$$
+\Delta f \approx \Delta \times \Delta S
+$$
+
+A **delta-neutral portfolio** is hedged as it is immunized against small changes in the sotck price. 
+
+A trading strategy that dynamically maintains a delta-neutural portfolio is called **delta hedge**.
+
+Delta change with stock price, thus the delta needs to be rebalanced periodically in order to maintain delta neutrality.
+
+In the limit where the portfolio is adjusted continuously, **perfect hedge** is achiedved and the strategy becomes self-financing.
+
+## Implementing Delta hedge
+
+Hedge $N$ **short** derivatives (be a seller of derivatives).
+
+Assume stock pays no dividends.
+
+The delta-neutral portfolio matains $N \times \Delta$ shares of stock plus $B$ borrowed dollars such that
+
+$$
+ N \times \Delta \times S  = N \times f +B\\
+-N \times f+ N \times \Delta \times S - B = 0
+$$
+
+(買遠期合約和借錢來買現貨)
+
+At next rebalancing point when the delta is $\Delta'$, buy $N \times (\Delta'-\Delta)$ shares to maintain $N \times \Delta'$ shares.
+
+Delta hedge is the discrete-time analog of the continuous-time limit and will rarely be self-financing.
+
+### Example 
+
+A hedger is **short** 10,000 European calls.(賣買權)
+
+$S=50, \sigma = 30%, r = 6 \%$
+
+This call's expiration is 4 weeks away, tis strike price is 50, and each call has a current value of $f=1.76791$ (from BS model)
+
+As an option covers 100 shares of stock, $N = 1000000$.
+
+The trader adjusts the portfolio weekly.
+
+The calls are replocated well if the cumulative cost of trading stock is close to the call premium's FV.
+
+
+## Tracking error revisted (避險誤差)
+
+## Gamma
+
+# Embedded options (嵌入式選擇權)
+
+## Warrant (認股權證)
+
+概念與選擇權相通，用詞不同
+
+## Implied volatility
+
+## 可轉換公司債
+
+# Term structure modeling 
+
+# Hull White term structure modeling 
+
+利率可隨時間變動，可結合 BS model 
+
+利率變化速度 a (用fit的)
+
+$$
+\mathrm{d}r = 
+$$
+
+## Monte Carlo method 
+
+## Hull White short rate simulation 
+(use package, eg., quantlab)
+
+
