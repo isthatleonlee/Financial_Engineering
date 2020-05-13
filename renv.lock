@@ -16,6 +16,20 @@
       "Repository": "CRAN",
       "Hash": "8f9ce74c6417d61f0782cbae5fd2b7b0"
     },
+    "Deriv": {
+      "Package": "Deriv",
+      "Version": "4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d95d44eb12f3a787482b0efa89251224"
+    },
+    "MASS": {
+      "Package": "MASS",
+      "Version": "7.3-51.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9efe80472b21189ebab1b74169808c26"
+    },
     "QFRM": {
       "Package": "QFRM",
       "Version": "1.0.1",
@@ -43,6 +57,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e652f23d8b1807cc975c51410d05b72f"
+    },
+    "Sim.DiffProc": {
+      "Package": "Sim.DiffProc",
+      "Version": "4.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7d39e191dd34576962ce12bdafe5d146"
     },
     "askpass": {
       "Package": "askpass",
